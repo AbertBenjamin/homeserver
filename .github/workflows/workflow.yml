@@ -17,6 +17,6 @@ jobs:
 
      - name: Deploy
        run: |
-          docker compose up -d --pull always
+          docker compose up -d --no-recreate
           docker system prune -f
 
