@@ -1,0 +1,22 @@
+name: Deploy to server
+
+on:
+  push:
+    branches:
+     - master
+
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+     - uses: actions/checkout@v4
+
+     - name: Decrypt secret
+       run: sops -d .env.enc > .env
+
+     - name: Deploy
+       run: |
+          docker compose up -d --pull always
+          docker system prune -f
+

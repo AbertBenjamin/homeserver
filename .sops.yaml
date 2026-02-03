@@ -1,0 +1,6 @@
+
+creation_rules:
+   - path_regex: \.env$
+     age: age1f5d75rlzuqkyfls42ynwrckledkx9u67s0zuuemtvdj6lchvfv9qas22dy
+   - path_regex: secrets/.*\.ya?ml$
+     age: age1f5d75rlzuqkyfls42ynwrckledkx9u67s0zuuemtvdj6lchvfv9qas22dy
