@@ -1,0 +1,36 @@
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    network_mode: host
+    # ports:
+    #   - "53:53/tcp"
+    #   - "53:53/udp"
+    #   - "80:80/tcp"
+    environment:
+      TZ: 'Europe/Oslo'
+      WEBPASSWORD: ${{ webpassword }}
+      DNSMASQ_LISTENING: 'all'
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+  terraria:
+    container_name: terraria
+    image: ryshe/terraria:vanilla-1.4.5.3
+    tty: true
+    stdin_open: true
+    ports:
+      - "7777:7777"
+    volumes: 
+     - ./terraria/worlds:/root/.local/share/Terraria/Worlds
+     - ./terraria/config:/config
+    environment:
+      - WORLD_FILENAME = epic.wld 
+    restart: unless-stopped
+
+   
