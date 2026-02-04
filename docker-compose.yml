@@ -12,9 +12,9 @@ services:
       TZ: 'Europe/Oslo'
       WEBPASSWORD: ${{ webpassword }}
       DNSMASQ_LISTENING: 'all'
-    # volumes:
-    #   - './etc-pihole:/etc/pihole'
-    #   - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    volumes:
+      - './pihole/data/etc-pihole:/etc/pihole'
+      - './pihole/data/etc-dnsmasq.d:/etc/dnsmasq.d'
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
