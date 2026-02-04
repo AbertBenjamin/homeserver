@@ -43,6 +43,20 @@ services:
      - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
 
+  nginx:
+   image: nginx:latest
+   container_name: nginx
+   ports:
+     - "80:80"
+     - "443:443"
+   volumes:
+     - ./nginx/config/:/etc/nginx/conf.d
+     - ./nginx/certs/:/etc/nginx/certs
+   depends_on:
+    - pihole
+    - wireguard
+   restart: unless-stopped
+
   # terraria:
   #   container_name: terraria
   #   image: ryshe/terraria:vanilla-1.4.5.3
