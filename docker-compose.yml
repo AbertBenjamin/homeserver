@@ -1,26 +1,47 @@
 
 services:
 
-
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    network_mode: host
-    # ports:
-    #   - "53:53/tcp"
-    #   - "53:53/udp"
-    #   - "80:80/tcp"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
     environment:
       TZ: 'Europe/Oslo'
       WEBPASSWORD: ${{ webpassword }}
       DNSMASQ_LISTENING: 'all'
-    volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    # volumes:
+    #   - './etc-pihole:/etc/pihole'
+    #   - './etc-dnsmasq.d:/etc/dnsmasq.d'
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
 
+  wireguard:
+    image: linuxserver/wireguard:latest
+    container_name: wireguard
+    cap_add:
+     - NET_ADMIN
+     - SYS_MODULE
+    environment:
+     - PUID=1000
+     - PGID=1000
+     - TZ=Europe/Oslo
+     - SERVERURL=auto
+     - SERVERPORT=51820
+     - PEERS=3
+     - PEERDNS=auto
+     - INTERNAL_SUBNET=10.13.13.0 
+    volumes:
+     - ./wireguard/config:/config
+     - /lib/modules:/lib/modules:ro
+    ports:
+     - "51820:51820/udp"
+    sysctls: 
+     - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
 
   # terraria:
   #   container_name: terraria
@@ -35,5 +56,8 @@ services:
   #   environment:
   #     - WORLD_FILENAME = epic.wld 
   #   restart: unless-stopped
+
+
+
 
    

@@ -1,6 +1,9 @@
 
 .env
 !.env.enc
+
 *worlds/*.wld
 */data/
+
+wireguard/config/
 
