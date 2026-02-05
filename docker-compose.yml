@@ -57,21 +57,16 @@ services:
     - wireguard
    restart: unless-stopped
 
-  # terraria:
-  #   container_name: terraria
-  #   image: ryshe/terraria:vanilla-1.4.5.3
-  #   tty: true
-  #   stdin_open: true
-  #   ports:
-  #     - "7777:7777"
-  #   volumes: 
-  #    - ./terraria/worlds:/root/.local/share/Terraria/Worlds
-  #    - ./terraria/config:/config
-  #   environment:
-  #     - WORLD_FILENAME = epic.wld 
-  #   restart: unless-stopped
+  terraria:
+    container_name: terraria-1.4.5.4
+    image: ryshe/terraria:vanilla-1.4.5.4
+    tty: true
+    stdin_open: true
+    ports:
+      - "7777:7777"
+    volumes: 
+     - ../terraria/worlds:/root/.local/share/Terraria/Worlds
+    environment:
+      - WORLD_FILENAME = epic
+    restart: unless-stopped
 
-
-
-
-   
