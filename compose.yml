@@ -15,8 +15,8 @@ services:
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       DNSMASQ_LISTENING: 'all'
     volumes:
-      - './pihole/data/etc-pihole:/etc/pihole'
-      - './pihole/data/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '~/pihole/etc-pihole:/etc/pihole'
+      - '~/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
@@ -37,7 +37,7 @@ services:
      - PEERDNS=auto
      - INTERNAL_SUBNET=10.13.13.0 
     volumes:
-     - ./wireguard/config:/config
+     - ~/wireguard/config:/config
      - /lib/modules:/lib/modules:ro
     ports:
      - "51820:51820/udp"
