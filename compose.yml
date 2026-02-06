@@ -4,10 +4,11 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "8080:80/tcp"
+    network_mode: host
+    # ports:
+    #   - "53:53/tcp"
+    #   - "53:53/udp"
+    #   - "8080:80/tcp"
     environment:
       TZ: 'Europe/Oslo'
       WEBPASSWORD: ${PIHOLE_PASSWORD}
