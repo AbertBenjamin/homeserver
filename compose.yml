@@ -66,9 +66,9 @@ services:
       - "7777:7777"
     volumes: 
      - ~/terraria/worlds:/root/.local/share/Terraria/Worlds
-     - ~/terraria/config:/root/.local/share/Terraria/Config
+     - ~/terraria/config:/config
     environment:
       - WORLD_FILENAME=epic.wld
-      - PASSWORD=${TERRARIA_PASSWORD}
+      - CONFIG_FILENAME=serverconfig.txt
     restart: unless-stopped
 
