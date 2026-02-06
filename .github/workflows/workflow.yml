@@ -16,6 +16,6 @@ jobs:
 
      - name: Deploy
        run: |
-          docker compose up -d terraria --force-recreate
+          docker compose up -d 
           docker system prune -f
 
