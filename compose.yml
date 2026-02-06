@@ -67,7 +67,7 @@ services:
     volumes: 
      - ../terraria/worlds:/root/.local/share/Terraria/Worlds
     environment:
-      - WORLD_FILENAME=epic
+      - WORLD_FILENAME=epic.wld
       # - PASSWORD=${TERRARIA_PASSWORD}
       - WORLDNAME=epic
     restart: unless-stopped
