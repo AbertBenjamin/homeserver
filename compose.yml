@@ -65,7 +65,7 @@ services:
     ports:
       - "7777:7777"
     volumes: 
-     - ../terraria/worlds:/root/.local/share/Terraria/Worlds
+     - ~/terraria/worlds:/root/.local/share/Terraria/Worlds
     environment:
       - WORLD_FILENAME=epic.wld
       # - PASSWORD=${TERRARIA_PASSWORD}
