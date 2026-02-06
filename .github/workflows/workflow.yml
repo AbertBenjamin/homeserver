@@ -12,7 +12,7 @@ jobs:
      - uses: actions/checkout@v4
 
      - name: Decrypt secret
-       run: sops -d .env.enc > .env
+       run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
 
      - name: Deploy
        run: |

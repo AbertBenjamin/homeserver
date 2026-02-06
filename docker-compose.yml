@@ -10,7 +10,7 @@ services:
       - "8080:80/tcp"
     environment:
       TZ: 'Europe/Oslo'
-      WEBPASSWORD: ${{ webpassword }}
+      WEBPASSWORD: ${PIHOLE_PASSWORD}
       DNSMASQ_LISTENING: 'all'
     volumes:
       - './pihole/data/etc-pihole:/etc/pihole'
@@ -67,6 +67,7 @@ services:
     volumes: 
      - ../terraria/worlds:/root/.local/share/Terraria/Worlds
     environment:
-      - WORLD_FILENAME = epic
+      - WORLD_FILENAME=epic
+      - PASSWORD=${TERRARIA_PASSWORD}
     restart: unless-stopped
 
