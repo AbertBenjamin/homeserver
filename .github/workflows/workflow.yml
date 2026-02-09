@@ -37,3 +37,4 @@ jobs:
       - name: deploy revolt
         working-directory: ./revolt
         run: docker compose up -d
+
