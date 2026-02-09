@@ -4,11 +4,11 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:2025.11.1
-    network_mode: host
-    # ports:
-    #   - "53:53/tcp"
-    #   - "53:53/udp"
-    #   - "8080:80/tcp"
+    # network_mode: host
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
     environment:
       TZ: 'Europe/Oslo'
       WEBPASSWORD: ${PIHOLE_PASSWORD}
@@ -20,6 +20,8 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
+    networks: 
+     - proxy
 
   wireguard:
     image: linuxserver/wireguard:1.0.20250521
