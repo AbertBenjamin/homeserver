@@ -20,8 +20,6 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
-    networks: 
-     - proxy
 
   wireguard:
     image: linuxserver/wireguard:1.0.20250521
