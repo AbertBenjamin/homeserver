@@ -9,24 +9,31 @@ jobs:
   deploy:
     runs-on: [self-hosted, debian]
     steps:
-     - uses: actions/checkout@v6
+      - name: Cleanup old checkout
+        run: |
+          if [ -d "/home/benjamin/actions-runner/_work/homeserver/homeserver" ]; then
+            cd /home/benjamin/actions-runner/_work/homeserver
+            sudo rm -rf homeserver
+          fi
+        continue-on-error: true
 
-     - name: Decrypt secret
-       run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
+      - uses: actions/checkout@v6
+      - name: Decrypt secret
+        run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
 
-     - name: Deploy
-       run: |
-          docker compose up -d 
-          docker system prune -f
+      - name: Deploy
+        run: |
+            docker compose up -d 
+            docker system prune -f
 
-     - name: deploy nginx
-       working-directory: ./nginx
-       run: docker compose up -d
+      - name: deploy nginx
+        working-directory: ./nginx
+        run: docker compose up -d
 
-     - name: decrypt revolt secrets
-       working-directory: ./revolt
-       run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
+      - name: decrypt revolt secrets
+        working-directory: ./revolt
+        run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
 
-     - name: deploy revolt
-       working-directory: ./revolt
-       run: docker compose up -d
+      - name: deploy revolt
+        working-directory: ./revolt
+        run: docker compose up -d
