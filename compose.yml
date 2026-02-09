@@ -13,7 +13,7 @@ services:
       TZ: 'Europe/Oslo'
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
-      DNSMASQ_LISTENING: 'all'
+      # DNSMASQ_LISTENING: 'all'
     volumes:
       - '~/pihole/etc-pihole:/etc/pihole'
       - '~/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
