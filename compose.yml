@@ -13,6 +13,7 @@ services:
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       # DNSMASQ_LISTENING: 'all'
+      FTLCONF_dns_listeningMode: 'all'
     volumes:
       - '~/pihole/etc-pihole:/etc/pihole'
       - '~/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
