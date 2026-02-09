@@ -1,0 +1,98 @@
+
+services:
+  database:
+    image: mongo:6
+    container_name: revolt-db
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - revolt
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: revolt-redis
+    networks:
+     - revolt
+    restart: unless-stopped
+
+  api:
+   image: revoltchat/server:latest
+   container_name: revolt-api
+   environment:
+    - REVOLT_APP_URL=${REVOLT_APP_URL}
+    - REVOLT_PUBLIC_URL=${REVOLT_PUBLIC_URL}
+    - REVOLT_MONGODB=${REVOLT_MONGODB}
+    - REVOLT_REDIS=${REVOLT_REDIS}
+    - REVOLT_VAPID_PRIVATE_KEY=${REVOLT_VAPID_PRIVATE_KEY}
+    - REVOLT_VAPID_PUBLIC_KEY=${REVOLT_VAPID_PUBLIC_KEY}
+   depends_on:
+    - database
+    - redis
+   networks:
+    - revolt
+    - proxy
+   ports:
+      - "8000:8000"
+   restart: unless-stopped
+
+  web:
+   image: revoltchat/client:latest
+   container_name: revolt-web
+   environment:
+    - REVOLT_API_URL=${REVOLT_API_URL}
+   ports:
+    - "5173:5173"
+   depends_on:
+    - api
+   networks:
+    - revolt
+    - proxy
+   restart: unless-stopped
+
+  autumn:
+    image: revoltchat/autumn:latest
+    container_name: revolt-autumn
+    environment:
+      - AUTUMN_MONGO_URI=mongodb://database:27017/revolt
+      - AUTUMN_PUBLIC_URL=${AUTUMN_PUBLIC_URL}
+    volumes:
+      - ./data/autumn:/autumn/files
+    depends_on:
+      - database
+    networks:
+      - revolt
+      - proxy
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  january:
+    image: revoltchat/january:latest
+    container_name: revolt-january
+    environment:
+      - JANUARY_MONGO_URI=mongodb://database:27017/revolt
+    depends_on:
+      - database
+    networks:
+      - revolt
+      - proxy
+    ports:
+      - "7000:7000"
+    restart: unless-stopped
+
+networks:
+  revolt:
+    driver: bridge
+  proxy: 
+    external: true
+
+
+
+
+
+
+
+
+
+

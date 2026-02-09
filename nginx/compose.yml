@@ -1,0 +1,22 @@
+
+services:
+  nginx:
+   image: nginx:1.27.3-alpine
+   container_name: nginx
+   ports:
+     - "80:80"
+     - "443:443"
+   volumes:
+     - ./nginx/config/:/etc/nginx/conf.d
+     - ~/nginx/certs/:/etc/nginx/certs
+     - ./html/:/usr/share/nginx/html
+     - ./logs:/var/log/nginx
+   restart: unless-stopped
+   networks:
+    - proxy
+
+networks:
+  proxy:
+    name: proxy
+    driver: bridge
+
