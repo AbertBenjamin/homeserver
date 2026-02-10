@@ -26,11 +26,3 @@ jobs:
         working-directory: ./nginx
         run: docker compose up -d
 
-      - name: decrypt revolt secrets
-        working-directory: ./revolt
-        run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
-
-      - name: deploy revolt
-        working-directory: ./revolt
-        run: docker compose up -d
-
