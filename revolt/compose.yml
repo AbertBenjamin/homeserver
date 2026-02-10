@@ -41,6 +41,7 @@ services:
    container_name: revolt-web
    environment:
     - REVOLT_API_URL=${REVOLT_API_URL}
+    - REVOLT_PUBLIC_URL=${REVOLT_PUBLIC_URL}
    ports:
     - "5173:5173"
    depends_on:

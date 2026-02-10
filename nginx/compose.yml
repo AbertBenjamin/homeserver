@@ -11,7 +11,7 @@ services:
      - ./nginx/config/:/etc/nginx/conf.d
      - ~/nginx/certs/:/etc/nginx/certs
      - ./html/:/usr/share/nginx/html
-     - ./logs:/var/log/nginx
+     - ~/logs:/var/log/nginx
    restart: unless-stopped
    networks:
     - proxy
