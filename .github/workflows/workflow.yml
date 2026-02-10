@@ -9,15 +9,11 @@ jobs:
   deploy:
     runs-on: [self-hosted, debian]
     steps:
-      - name: Cleanup old checkout
-        run: |
-          if [ -d "/home/benjamin/actions-runner/_work/homeserver/homeserver" ]; then
-            cd /home/benjamin/actions-runner/_work/homeserver
-            sudo rm -rf homeserver
-          fi
-        continue-on-error: true
 
       - uses: actions/checkout@v6
+        with:
+         clean: true
+
       - name: Decrypt secret
         run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
 
