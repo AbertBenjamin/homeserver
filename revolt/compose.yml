@@ -16,6 +16,35 @@ services:
      - revolt
     restart: unless-stopped
 
+  rabbitmq:
+     image: rabbitmq:3-alpine
+     container_name: revolt-rabbitmq
+     networks:
+       - revolt
+     restart: unless-stopped
+     volumes:
+       - ~/data/rabbitmq:/var/lib/rabbitmq
+     # optional healthcheck
+     healthcheck:
+        test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+        interval: 10s
+        timeout: 5s
+        retries: 10
+
+  delta:
+    image: revoltchat/delta:latest
+    container_name: revolt-delta
+    networks:
+      - revolt
+    restart: unless-stopped
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      # example URL; set this to whatever var delta actually reads
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      # plus whatever else delta needs (mongo/redis/api URLs etc)
+
   api:
    image: revoltchat/server:latest
    container_name: revolt-api
