@@ -4,7 +4,7 @@ services:
     image: mongo:6
     container_name: revolt-db
     volumes:
-      - ./data/db:/data/db
+      - ~/data/db:/data/db
     networks:
       - revolt
     restart: unless-stopped
@@ -57,7 +57,7 @@ services:
       - AUTUMN_MONGO_URI=mongodb://database:27017/revolt
       - AUTUMN_PUBLIC_URL=${AUTUMN_PUBLIC_URL}
     volumes:
-      - ./data/autumn:/autumn/files
+      - ~/data/autumn:/autumn/files
     depends_on:
       - database
     networks:
