@@ -45,8 +45,8 @@ services:
     restart: unless-stopped
 
   terraria:
-    container_name: terraria-1.4.5.4
-    image: ryshe/terraria:vanilla-1.4.5.4
+    container_name: terraria-1.4.5.5
+    image: ryshe/terraria:vanilla-1.4.5.5
     tty: true
     stdin_open: true
     ports:
