@@ -90,8 +90,12 @@ services:
          2908170107, \ 
          3667639498, \ 
          3667639498, \ 
-         3667639498, \ 
-         3667639498"
+         3667639498, \
+         2669644269, \
+         3044249615, \
+         2824688266, \
+         2816694149"
+
       - "TMOD_ENABLEDMODS=2824688072, \
          2824688266, \
          2877696929, \
@@ -113,8 +117,10 @@ services:
          2908170107, \ 
          3667639498, \ 
          3667639498, \ 
-         3667639498, \ 
-         3667639498"
+         2669644269, \
+         3044249615, \
+         2824688266, \
+         2816694149"
       # Shutdown Message and Autosave Interval (In Minutes)
       - "TMOD_SHUTDOWN_MESSAGE=Goodbye!"
       - "TMOD_AUTOSAVE_INTERVAL=15"
@@ -125,8 +131,8 @@ services:
       # The following world settings are only used when generating a new world.
       - "TMOD_WORLDNAME=Earth"
       - "TMOD_WORLDSIZE=3"
-      - "TMOD_WORLDSEED=not the bees!"
-      - "TMOD_DIFFICULTY=3"
+      - "TMOD_WORLDSEED=mongo"
+      - "TMOD_DIFFICULTY=2"
       # (Deprecated) If TMOD_USECONFIGFILE is set to "Yes", it is expected to have a serverconfig.txt mapped. The Server Settings above will be ignored.
       - "TMOD_USECONFIGFILE=No"
       - "UPDATE_NOTICE=false"
