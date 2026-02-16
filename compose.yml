@@ -61,7 +61,7 @@ services:
 
   tmodloader:
     container_name: tmodloader
-    image: jacobsmile/tmodloader1.4:v2026.01.2.1
+    image: jacobsmile/tmodloader1.4:v2025.12.3.0
     tty: true
     stdin_open: true
     ports:
