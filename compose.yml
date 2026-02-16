@@ -130,5 +130,6 @@ services:
       # (Deprecated) If TMOD_USECONFIGFILE is set to "Yes", it is expected to have a serverconfig.txt mapped. The Server Settings above will be ignored.
       - "TMOD_USECONFIGFILE=No"
       - "UPDATE_NOTICE=false"
+      - "TMOD_PORT=7778"
 
 
