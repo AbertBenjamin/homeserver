@@ -1,0 +1,35 @@
+services:
+  enshrouded:
+    image: mornedhels/enshrouded-server:1.7.1
+    container_name: enshrouded-server
+    hostname: enshrouded
+    stop_grace_period: 90s
+    ports:
+      - "15637:15637/udp"
+    volumes:
+      - ~/enshrouded:/opt/enshrouded
+    # devices:
+    #   - /dev/ntsync:/dev/ntsync
+    environment:
+      - SERVER_NAME=Enshrouded server
+      - UPDATE_CRON=*/30 * * * *
+      - PUID=4711
+      - PGID=4711
+      - SERVER_ROLE_0_NAME=Admins
+      - SERVER_ROLE_0_PASSWORD=${SERVER_ROLE_0_PASSWORD}
+      - SERVER_ROLE_0_CAN_KICK_BAN=true
+      - SERVER_ROLE_0_CAN_ACCESS_INVENTORIES=true
+      - SERVER_ROLE_0_CAN_EDIT_WORLD=true
+      - SERVER_ROLE_0_CAN_EDIT_BASE=true
+      - SERVER_ROLE_0_CAN_EXTEND_BASE=true
+      - SERVER_ROLE_0_RESERVED_SLOTS=3
+      - SERVER_ROLE_1_NAME=Friends
+      - SERVER_ROLE_1_PASSWORD=${SERVER_ROLE_1_PASSWORD}
+      - SERVER_ROLE_1_CAN_ACCESS_INVENTORIES=true
+      - SERVER_ROLE_1_CAN_EDIT_WORLD=true
+      - SERVER_ROLE_1_CAN_EDIT_BASE=true
+      - SERVER_ROLE_1_CAN_EXTEND_BASE=true
+      - SERVER_ROLE_1_RESERVED_SLOTS=3
+    restart: unless_stopped
+
+  
