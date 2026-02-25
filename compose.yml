@@ -1,6 +1,6 @@
 
 include:
-  - ./enshrouded
+  - ./enshrouded/compose.yml
 
 services:
 
