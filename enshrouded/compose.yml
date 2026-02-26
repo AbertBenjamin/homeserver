@@ -30,6 +30,14 @@ services:
       - SERVER_ROLE_1_CAN_EDIT_BASE=true
       - SERVER_ROLE_1_CAN_EXTEND_BASE=true
       - SERVER_ROLE_1_RESERVED_SLOTS=3
+    deploy:
+      resources:
+        limits:
+          cpus: '8.0'
+          memory: 8G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
     restart: unless-stopped
 
   
