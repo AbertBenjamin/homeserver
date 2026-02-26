@@ -1,0 +1,92 @@
+
+services:
+
+  terraria:
+    container_name: terraria-1.4.5.5
+    image: ryshe/terraria:vanilla-1.4.5.5
+    tty: true
+    stdin_open: true
+    ports:
+      - "7777:7777"
+    volumes: 
+     - ~/terraria/worlds:/root/.local/share/Terraria/Worlds
+     - ~/terraria/config:/config
+    environment:
+      - WORLD_FILENAME=epic.wld
+      - CONFIG_FILENAME=serverconfig.txt
+    restart: unless-stopped
+
+
+  tmodloader:
+    container_name: tmodloader
+    image: jacobsmile/tmodloader1.4:v2025.12.3.0
+    tty: true
+    stdin_open: true
+    ports:
+      - "7778:7778"
+    volumes: 
+     - ~/tmodloader/data:/data
+    environment:
+      - "TMOD_AUTODOWNLOAD=2824688072, \
+         2824688266, \
+         2877696929, \
+         2785100219, \
+         2828370879, \
+         2619954303, \
+         3222493606, \
+         3539368598, \
+         2563309347, \
+         2815540735, \
+         3478363753, \
+         2570931073, \
+         2927446524, \
+         2995193002, \
+         3241967932, \
+         3486967746, \
+         2816694149, \
+         2826174775, \ 
+         2908170107, \ 
+         2669644269, \
+         3044249615, \
+         2824688266, \
+         2816694149"
+
+      - "TMOD_ENABLEDMODS=2824688072, \
+         2824688266, \
+         2877696929, \
+         2785100219, \
+         2828370879, \
+         2619954303, \
+         3222493606, \
+         3539368598, \
+         2563309347, \
+         2815540735, \
+         3478363753, \
+         2570931073, \
+         2927446524, \
+         2995193002, \
+         3241967932, \
+         3486967746, \
+         2816694149, \
+         2826174775, \ 
+         2908170107, \ 
+         2669644269, \
+         3044249615, \
+         2824688266, \
+         2816694149"
+      # Shutdown Message and Autosave Interval (In Minutes)
+      - "TMOD_SHUTDOWN_MESSAGE=Goodbye!"
+      - "TMOD_AUTOSAVE_INTERVAL=15"
+      # Server Settings
+      - "TMOD_MOTD=Welcome to my tModLoader Server!"
+      - "TMOD_PASS=secret"
+      - "TMOD_MAXPLAYERS=16"
+      # The following world settings are only used when generating a new world.
+      - "TMOD_WORLDNAME=Earth"
+      - "TMOD_WORLDSIZE=3"
+      - "TMOD_WORLDSEED=mongo"
+      - "TMOD_DIFFICULTY=2"
+      # (Deprecated) If TMOD_USECONFIGFILE is set to "Yes", it is expected to have a serverconfig.txt mapped. The Server Settings above will be ignored.
+      - "TMOD_USECONFIGFILE=No"
+      - "UPDATE_NOTICE=false"
+      - "TMOD_PORT=7778"
