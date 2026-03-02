@@ -5,7 +5,7 @@ services:
     container_name: samba
     environment:
       NAME: "data"
-      USER: "${fileshare_user}"
+      USER: "${fileshare_username}"
       PASS: "${fileshare_password}"
     ports: 
       - "445:445"
