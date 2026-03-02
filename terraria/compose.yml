@@ -90,3 +90,4 @@ services:
       - "TMOD_USECONFIGFILE=No"
       - "UPDATE_NOTICE=false"
       - "TMOD_PORT=7778"
+    restart: unless-stopped
