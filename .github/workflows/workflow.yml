@@ -30,7 +30,3 @@ jobs:
             docker compose up -d 
             docker system prune -f
 
-      - name: deploy nginx
-        working-directory: ./nginx
-        run: docker compose up -d
-
