@@ -1,7 +1,7 @@
 
 services:
   samba:
-    image: dperson/samba:4.23.5
+    image: dperson/samba:4.23
     container_name: samba
     environment:
       NAME: "data"
