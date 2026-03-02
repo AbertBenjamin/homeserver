@@ -1,0 +1,15 @@
+
+services:
+  samba:
+    image: dperson/samba:4.23.5
+    container_name: samba
+    environment:
+      NAME: "data"
+      USER: "${fileshare_user}"
+      PASS: "${fileshare_password}"
+    ports: 
+      - "445:445"
+    volumes:
+      - /mnt/storage/reaper:/storage/reaper
+    restart: unless-stopped
+
