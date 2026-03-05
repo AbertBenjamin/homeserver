@@ -41,6 +41,7 @@ services:
      - PEERS=3
      - PEERDNS=auto
      - INTERNAL_SUBNET=10.13.13.0 
+     - ALLOWEDIPS=0.0.0.0/0
     volumes:
      - ~/wireguard/config:/config
      - /lib/modules:/lib/modules:ro
