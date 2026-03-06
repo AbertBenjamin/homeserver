@@ -7,9 +7,9 @@ services:
      - "80:80"
      # - "443:443"
    volumes:
-     - ./nginx/config/:/etc/nginx/conf.d
+     - ./config/:/etc/nginx/conf.d
      - ~/nginx/certs/:/etc/nginx/certs
-     - ./nginx/html/:/usr/share/nginx/html
+     - ./html/:/usr/share/nginx/html
      - ~/logs:/var/log/nginx
    restart: unless-stopped
    networks:
