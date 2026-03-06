@@ -1,7 +1,7 @@
 
 include:
   - ./enshrouded/compose.yml
-  # - ./nginx/compose.yml
+  - ./nginx/compose.yml
   - ./terraria/compose.yml
   - ./fileshare/compose.yml
 
