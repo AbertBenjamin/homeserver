@@ -20,6 +20,9 @@ services:
       FTLCONF_dns_listeningMode: 'all'
     cap_add:
       - NET_ADMIN
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.5
     restart: unless-stopped
 
   wireguard:
@@ -35,7 +38,7 @@ services:
      - SERVERURL=auto
      - SERVERPORT=51820
      - PEERS=3
-     - PEERDNS=auto
+     - PEERDNS=172.18.0.5
      - INTERNAL_SUBNET=10.13.13.0 
      - ALLOWEDIPS=0.0.0.0/0
     volumes:
@@ -45,5 +48,10 @@ services:
      - "51820:51820/udp"
     sysctls: 
      - net.ipv4.conf.all.src_valid_mark=1
+    networks:
+     - homeserver_default
     restart: unless-stopped
 
+networks:
+  homeserver_default:
+    external: true
