@@ -55,3 +55,7 @@ services:
 networks:
   homeserver_default:
     external: true
+  proxy:
+   name: proxy
+   driver: bridge
+
