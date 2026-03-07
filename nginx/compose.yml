@@ -1,19 +1,26 @@
-
 services:
   nginx:
-   image: nginx:1.27.3-alpine
-   container_name: nginx
-   ports:
-     - "80:80"
-     - "443:443"
-   volumes:
-     - ./config/:/etc/nginx/conf.d
-     - ~/nginx/certs/:/etc/nginx/certs
-     - ./html/:/usr/share/nginx/html
-     - ~/logs:/var/log/nginx
-   restart: unless-stopped
-   networks:
-    - proxy
+    image: nginx:1.27.3-alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/:/etc/nginx/conf.d
+      - ~/nginx/certs/:/etc/nginx/certs
+      - ./html/:/usr/share/nginx/html
+      - ~/logs:/var/log/nginx
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 128M
+        reservations:
+          cpus: "0.1"
+          memory: 64M
+    restart: unless-stopped
+    networks:
+      - proxy
 
   certbot:
     image: certbot/certbot
@@ -28,4 +35,3 @@ networks:
   proxy:
     name: proxy
     driver: bridge
-
