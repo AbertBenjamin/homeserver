@@ -2,8 +2,8 @@
 services:
 
   terraria:
-    container_name: terraria-1.4.5.5
-    image: ryshe/terraria:vanilla-1.4.5.5
+    container_name: terraria-1.4.5.6
+    image: ryshe/terraria:vanilla-1.4.5.6
     tty: true
     stdin_open: true
     ports:
