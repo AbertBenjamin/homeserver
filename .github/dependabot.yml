@@ -25,6 +25,18 @@ updates:
       docker-images:
         patterns:
           - "*"
+
+  - package-ecosystem: "docker"
+    directory: "/terraria"
+    schedule:
+      interval: "daily"
+      time: "03:00"
+
+  - package-ecosystem: "docker"
+    directory: "/enshrouded"
+    schedule:
+      interval: "daily"
+      time: "03:00"
   
   # GitHub Actions workflows
   - package-ecosystem: "github-actions"
