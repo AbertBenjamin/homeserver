@@ -26,13 +26,13 @@ updates:
         patterns:
           - "*"
 
-  - package-ecosystem: "docker"
+  - package-ecosystem: "docker-compose"
     directory: "/terraria"
     schedule:
       interval: "daily"
       time: "03:00"
 
-  - package-ecosystem: "docker"
+  - package-ecosystem: "docker-compose"
     directory: "/enshrouded"
     schedule:
       interval: "daily"
