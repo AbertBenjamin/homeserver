@@ -3,7 +3,6 @@ services:
     image: dockurr/samba:4.23.5
     container_name: samba
     environment:
-      NAME: "data"
       USER: "${fileshare_username}"
       PASS: "${fileshare_password}"
     ports:
