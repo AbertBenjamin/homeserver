@@ -8,5 +8,5 @@ services:
     ports:
       - "445:445"
     volumes:
-      - /mnt/storage/sounds:/storage
+      - /mnt/storage:/storage
     restart: unless-stopped
