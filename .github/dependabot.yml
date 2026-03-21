@@ -1,8 +1,3 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 # .github/dependabot.yml
 version: 2
 updates:
@@ -37,7 +32,7 @@ updates:
     schedule:
       interval: "daily"
       time: "03:00"
-  
+
   # GitHub Actions workflows
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -51,4 +46,3 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-
