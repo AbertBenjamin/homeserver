@@ -3,16 +3,15 @@ name: Deploy to server
 on:
   push:
     branches:
-     - main
+      - main
 
 jobs:
   deploy:
     runs-on: [self-hosted, debian]
     steps:
-
       - uses: actions/checkout@v6
         with:
-         clean: true
+          clean: true
 
       - name: Decrypt secret
         run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
@@ -27,6 +26,5 @@ jobs:
 
       - name: Deploy
         run: |
-            docker compose up -d 
-            docker system prune -f
-
+          docker compose up -d 
+          docker system prune -f
