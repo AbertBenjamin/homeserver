@@ -11,4 +11,5 @@ services:
     volumes:
       - /mnt/storage/reaper:/storage/reaper
       - /mnt/storage/sounds:/storage/sounds
+      - ./fileshare/smb.conf:/etc/samba/smb.conf
     restart: unless-stopped
