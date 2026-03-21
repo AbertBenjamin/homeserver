@@ -1,4 +1,3 @@
-
 services:
   samba:
     image: dockurr/samba:4.23.5
@@ -7,9 +6,9 @@ services:
       NAME: "data"
       USER: "${fileshare_username}"
       PASS: "${fileshare_password}"
-    ports: 
+    ports:
       - "445:445"
     volumes:
       - /mnt/storage/reaper:/storage/reaper
+      - /mnt/storage/sounds:/storage/sounds
     restart: unless-stopped
-
