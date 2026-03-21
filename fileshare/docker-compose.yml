@@ -5,12 +5,8 @@ services:
     environment:
       USER: "${fileshare_username}"
       PASS: "${fileshare_password}"
-      UID: "1000"
-      GID: "1000"
     ports:
       - "445:445"
     volumes:
-      - /mnt/storage/reaper:/storage/reaper
-      - /mnt/storage/sounds:/storage/sounds
-      - ./smb.conf:/etc/samba/smb.conf
+      - /mnt/storage/sounds:/storage
     restart: unless-stopped
