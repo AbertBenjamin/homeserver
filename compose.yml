@@ -34,9 +34,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Oslo
-      - SERVERURL=auto
+      - SERVERURL=${SERVER_URL}
       - SERVERPORT=51820
-      - PEERS=3
+      - PEERS=10
       - PEERDNS=172.18.0.5
       - INTERNAL_SUBNET=10.13.13.0
       - ALLOWEDIPS=0.0.0.0/0
