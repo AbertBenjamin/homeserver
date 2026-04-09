@@ -50,7 +50,7 @@ services:
     networks:
       homeserver_default:
       lan:
-        ipv4_address: 192.168.0.241
+        ipv4_address: 192.168.0.240
 
     restart: unless-stopped
 
@@ -65,4 +65,4 @@ networks:
       config:
         - subnet: 192.168.0.0/24
           gateway: 192.168.0.1
-          ip_range: 192.168.0.241/29
+          ip_range: 192.168.0.240/29
