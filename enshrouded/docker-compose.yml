@@ -38,5 +38,8 @@ services:
         reservations:
           cpus: '1.0'
           memory: 2G
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.7
     restart: unless-stopped
   

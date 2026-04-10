@@ -12,6 +12,9 @@ services:
     environment:
       - WORLD_FILENAME=epic.wld
       - CONFIG_FILENAME=serverconfig.txt
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.8
     restart: unless-stopped
 
   tmodloader:
@@ -87,4 +90,7 @@ services:
       - "TMOD_USECONFIGFILE=No"
       - "UPDATE_NOTICE=false"
       - "TMOD_PORT=7778"
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.9
     restart: unless-stopped
