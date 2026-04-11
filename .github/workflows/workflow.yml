@@ -28,5 +28,6 @@ jobs:
 
       - name: Deploy
         run: |
-          docker compose up -d 
+          docker compose pull
+          docker compose up -d --no-recreate
           docker system prune -f
