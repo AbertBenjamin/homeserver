@@ -26,8 +26,8 @@ services:
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dns_listeningMode: "all"
-    volumes:
-      - ./pihole/custom.list:/etc/pihole/custom.list:ro
+    # volumes:
+    #   - ./pihole/custom.list:/etc/pihole/custom.list:ro
     cap_add:
       - NET_ADMIN
     networks:
