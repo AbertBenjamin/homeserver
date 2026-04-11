@@ -9,4 +9,7 @@ services:
       - "445:445"
     volumes:
       - /mnt/storage:/storage
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.6
     restart: unless-stopped

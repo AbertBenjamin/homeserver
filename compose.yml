@@ -16,7 +16,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:2026.02.0
+    image: pihole/pihole:2026.04.0
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -26,6 +26,8 @@ services:
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dns_listeningMode: "all"
+    volumes:
+      - ./pihole/custom.list:/etc/pihole/custom.list:ro
     cap_add:
       - NET_ADMIN
     networks:
@@ -58,20 +60,10 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
     networks:
       homeserver_default:
-      lan:
-        ipv4_address: 192.168.0.240
+        ipv4_address: 172.18.0.3
 
     restart: unless-stopped
 
 networks:
   homeserver_default:
     external: true
-  lan:
-    driver: macvlan
-    driver_opts:
-      parent: enp4s0
-    ipam:
-      config:
-        - subnet: 192.168.0.0/24
-          gateway: 192.168.0.1
-          ip_range: 192.168.0.240/29

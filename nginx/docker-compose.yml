@@ -29,6 +29,9 @@ services:
       - ~/nginx/certs:/etc/letsencrypt
       - ./html/:/var/www/html
     entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --quiet; sleep 12h & wait $${!}; done"
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.10
     restart: unless-stopped
 
 networks:
