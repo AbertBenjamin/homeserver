@@ -1,7 +1,7 @@
 services:
   samba:
-    image: dockurr/samba:4.23.5
     container_name: samba
+    image: dockurr/samba:4.23.5
     environment:
       USER: "${fileshare_username}"
       PASS: "${fileshare_password}"

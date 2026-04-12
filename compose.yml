@@ -6,8 +6,8 @@ include:
 
 services:
   uptime-kuma:
-    image: louislam/uptime-kuma:1
     container_name: uptime-kuma
+    image: louislam/uptime-kuma:1
     restart: unless-stopped
     volumes:
       - /opt/homeserver/uptime-kuma:/app/data
@@ -36,8 +36,8 @@ services:
     restart: unless-stopped
 
   wireguard:
-    image: linuxserver/wireguard:1.0.20250521
     container_name: wireguard
+    image: linuxserver/wireguard:1.0.20250521
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
