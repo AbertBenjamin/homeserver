@@ -10,6 +10,7 @@ services:
     image: louislam/uptime-kuma:2.2.1
     volumes:
       - /opt/homeserver/uptime-kuma:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "3001:3001"
     networks:
