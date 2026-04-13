@@ -79,7 +79,7 @@ services:
       - "TMOD_AUTOSAVE_INTERVAL=15"
       # Server Settings
       - "TMOD_MOTD=Welcome to my tModLoader Server!"
-      - "TMOD_PASS=secret"
+      - "TMOD_PASS=${TMOD_PASS}"
       - "TMOD_MAXPLAYERS=16"
       # The following world settings are only used when generating a new world.
       - "TMOD_WORLDNAME=Earth"
