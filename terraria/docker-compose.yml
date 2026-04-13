@@ -12,6 +12,13 @@ services:
     environment:
       - WORLD_FILENAME=epic.wld
       - CONFIG_FILENAME=serverconfig.txt
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          cpus: "1.0"
+          memory: 1G
     networks:
       homeserver_default:
         ipv4_address: 172.18.0.8
@@ -90,6 +97,14 @@ services:
       - "TMOD_USECONFIGFILE=No"
       - "UPDATE_NOTICE=false"
       - "TMOD_PORT=7778"
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 8G
+        reservations:
+          cpus: "1.0"
+          memory: 2G
     networks:
       homeserver_default:
         ipv4_address: 172.18.0.9
