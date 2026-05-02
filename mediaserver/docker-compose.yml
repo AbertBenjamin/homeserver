@@ -14,10 +14,11 @@ services:
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
       - SERVER_CITIES=Oslo
       - TZ=Europe/Oslo
-    volumes:
-      - ./gluetun/config:/gluetun
     ports:
-      - 8081:8080   # qBittorrent web-UI (legges her, ikke på qBit)
+      - 8081:8080   # qBittorrent web-UI
+      - 9696:9696   # Prowlarr
+      - 8989:8989   # Sonarr
+      - 7878:7878   # Radarr
     restart: unless-stopped
 
   qbittorrent:
@@ -35,3 +36,61 @@ services:
       depends_on:
         - gluetun
       restart: unless-stopped
+
+  prowlarr:
+    image: linuxserver/prowlarr:2.3.5.5327-ls144
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Oslo
+    volumes:
+      - ./prowlarr/config:/config
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:4.0.17.2952-ls310
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Oslo
+    volumes:
+      - ./sonarr/config:/config
+      - /mnt/storage/media:/media
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:6.1.1.10360-ls300
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Oslo
+    volumes:
+      - ./radarr/config:/config
+      - /mnt/storage/media:/media
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+    restart: unless-stopped
+
+  jellyfin:
+    image: linuxserver/jellyfin:10.11.8ubu2404-ls30
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Oslo
+    volumes:
+      - ./jellyfin/config:/config
+      - /mnt/storage/media:/media:ro
+    ports:
+      - 8096:8096
+    restart: unless-stopped
