@@ -26,6 +26,10 @@ jobs:
         working-directory: ./fileshare
         run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
 
+      - name: Decrypt secret
+        working-directory: ./mediaserver
+        run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
+
       - name: Deploy
         run: |
           docker compose up -d --pull always --remove-orphans
