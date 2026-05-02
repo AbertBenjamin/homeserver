@@ -19,3 +19,19 @@ services:
     ports:
       - 8081:8080   # qBittorrent web-UI (legges her, ikke på qBit)
     restart: unless-stopped
+
+  qbittorrent:
+      image: linuxserver/qbittorrent:5.1.4-r3-ls452
+      container_name: qbittorrent
+      environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ=Europe/Oslo
+        - WEBUI_PORT=8080
+      volumes:
+        - ./qbittorrent/config:/config
+        - /mnt/storage/media:/downloads
+      network_mode: "service:gluetun"
+      depends_on:
+        - gluetun
+      restart: unless-stopped
