@@ -30,7 +30,7 @@ services:
         - TZ=Europe/Oslo
         - WEBUI_PORT=8080
       volumes:
-        - ./qbittorrent/config:/config
+        - /opt/homeserver/qbittorrent:/config
         - /mnt/storage/media:/downloads
       network_mode: "service:gluetun"
       depends_on:
@@ -45,7 +45,7 @@ services:
       - PGID=1000
       - TZ=Europe/Oslo
     volumes:
-      - ./prowlarr/config:/config
+      - /opt/homeserver/prowlarr:/config
     network_mode: "service:gluetun"
     depends_on:
       - gluetun
@@ -59,7 +59,7 @@ services:
       - PGID=1000
       - TZ=Europe/Oslo
     volumes:
-      - ./sonarr/config:/config
+      - /opt/homeserver/sonarr:/config
       - /mnt/storage/media:/media
     network_mode: "service:gluetun"
     depends_on:
@@ -74,7 +74,7 @@ services:
       - PGID=1000
       - TZ=Europe/Oslo
     volumes:
-      - ./radarr/config:/config
+      - /opt/homeserver/radarr:/config
       - /mnt/storage/media:/media
     network_mode: "service:gluetun"
     depends_on:
@@ -89,7 +89,7 @@ services:
       - PGID=1000
       - TZ=Europe/Oslo
     volumes:
-      - ./jellyfin/config:/config
+      - /opt/homeserver/jellyfin:/config
       - /mnt/storage/media:/media:ro
     ports:
       - 8096:8096
