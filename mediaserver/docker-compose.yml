@@ -57,6 +57,7 @@ services:
     volumes:
       - /opt/homeserver/sonarr:/config
       - /mnt/storage/media:/media
+      - /mnt/storage/media:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -71,6 +72,7 @@ services:
     volumes:
       - /opt/homeserver/radarr:/config
       - /mnt/storage/media:/media
+      - /mnt/storage/media:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -85,6 +87,7 @@ services:
     volumes:
       - /opt/homeserver/lidarr:/config
       - /mnt/storage/media:/media
+      - /mnt/storage/media:/downloads
     ports:
       - 8686:8686
     restart: unless-stopped
