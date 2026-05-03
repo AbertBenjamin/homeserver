@@ -16,7 +16,7 @@ services:
       - TZ=Europe/Oslo
     ports:
       - 8081:8080   # qBittorrent web-UI
-      - 9696:9696   # Prowlarr
+
       - 8989:8989   # Sonarr
       - 7878:7878   # Radarr
     restart: unless-stopped
@@ -46,9 +46,8 @@ services:
       - TZ=Europe/Oslo
     volumes:
       - /opt/homeserver/prowlarr:/config
-    network_mode: "service:gluetun"
-    depends_on:
-      - gluetun
+    ports:
+      - 9696:9696
     restart: unless-stopped
 
   sonarr:
