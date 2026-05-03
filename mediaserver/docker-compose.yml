@@ -34,9 +34,9 @@ services:
         - gluetun
       restart: unless-stopped
 
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
-    container_name: flaresolverr
+  byparr:
+    image: ghcr.io/thephaseless/byparr:v2.1.0
+    container_name: byparr
     environment:
       - TZ=Europe/Oslo
     ports:
