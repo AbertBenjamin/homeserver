@@ -35,7 +35,7 @@ services:
       restart: unless-stopped
 
   byparr:
-    image: ghcr.io/thephaseless/byparr:v2.1.0
+    image: ghcr.io/thephaseless/byparr:latest
     container_name: byparr
     environment:
       - TZ=Europe/Oslo
