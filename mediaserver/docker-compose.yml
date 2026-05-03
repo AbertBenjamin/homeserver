@@ -16,9 +16,6 @@ services:
       - TZ=Europe/Oslo
     ports:
       - 8081:8080   # qBittorrent web-UI
-
-      - 8989:8989   # Sonarr
-      - 7878:7878   # Radarr
     restart: unless-stopped
 
   qbittorrent:
@@ -60,9 +57,8 @@ services:
     volumes:
       - /opt/homeserver/sonarr:/config
       - /mnt/storage/media:/media
-    network_mode: "service:gluetun"
-    depends_on:
-      - gluetun
+    ports:
+      - 8989:8989
     restart: unless-stopped
 
   radarr:
@@ -75,9 +71,8 @@ services:
     volumes:
       - /opt/homeserver/radarr:/config
       - /mnt/storage/media:/media
-    network_mode: "service:gluetun"
-    depends_on:
-      - gluetun
+    ports:
+      - 7878:7878
     restart: unless-stopped
 
   jellyfin:
