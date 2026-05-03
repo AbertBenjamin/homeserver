@@ -75,6 +75,20 @@ services:
       - 7878:7878
     restart: unless-stopped
 
+  lidarr:
+    image: linuxserver/lidarr:3.1.0.4875-ls26
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Oslo
+    volumes:
+      - /opt/homeserver/lidarr:/config
+      - /mnt/storage/media:/media
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+
   jellyfin:
     image: linuxserver/jellyfin:10.11.8ubu2404-ls30
     container_name: jellyfin
