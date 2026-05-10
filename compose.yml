@@ -8,7 +8,7 @@ include:
 services:
   uptime-kuma:
     container_name: uptime-kuma
-    image: louislam/uptime-kuma:2.2.1
+    image: louislam/uptime-kuma:2.3.2
     volumes:
       - /opt/homeserver/uptime-kuma:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -24,7 +24,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:2026.04.0
+    image: pihole/pihole:2026.04.1
     ports:
       - "53:53/tcp"
       - "53:53/udp"
