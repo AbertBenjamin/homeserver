@@ -8,7 +8,7 @@ include:
 services:
   uptime-kuma:
     container_name: uptime-kuma
-    image: louislam/uptime-kuma:2.2.1
+    image: louislam/uptime-kuma:2.4.0
     volumes:
       - /opt/homeserver/uptime-kuma:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -24,7 +24,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:2026.04.0
+    image: pihole/pihole:2026.07.2
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -49,7 +49,7 @@ services:
 
   wireguard:
     container_name: wireguard
-    image: linuxserver/wireguard:1.0.20250521
+    image: linuxserver/wireguard:1.0.20260223
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
