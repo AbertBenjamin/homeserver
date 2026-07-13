@@ -1,6 +1,6 @@
 services:
   enshrouded:
-    image: mornedhels/enshrouded-server:1.7.2-wine
+    image: mornedhels/enshrouded-server:1.7.2-proton
     container_name: enshrouded-server
     hostname: enshrouded
     stop_grace_period: 90s
