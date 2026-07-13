@@ -8,8 +8,8 @@ services:
       - "15637:15637/udp"
     volumes:
       - ~/enshrouded:/opt/enshrouded
-    # devices:
-    #   - /dev/ntsync:/dev/ntsync
+    devices:
+      - /dev/ntsync:/dev/ntsync
     environment:
       - SERVER_NAME=Enshrouded server
       - UPDATE_CRON=*/30 * * * *
