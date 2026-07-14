@@ -31,7 +31,8 @@ services:
       - SERVER_ROLE_1_CAN_EDIT_BASE=true
       - SERVER_ROLE_1_CAN_EXTEND_BASE=true
       - SERVER_ROLE_1_RESERVED_SLOTS=3
-      - FACTORY_PRODUCTION_SPEED_FACTOR=2
+      - SERVER_GS_PRESET=Custom
+      - SERVER_GS_FACTORY_PRODUCTION_SPEED_FACTOR=2
     deploy:
       resources:
         limits:
