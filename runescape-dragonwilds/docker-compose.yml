@@ -1,0 +1,32 @@
+services:
+  runescape-dragonwilds:
+    image: indifferentbroccoli/runescape-dragonwilds-server-docker
+    container_name: runescape-dragonwilds
+    stop_grace_period: 30s
+    ports:
+      - "7788:7788/udp"
+    volumes:
+      - ~/runescape-dragonwilds:/home/steam/server-files
+    environment:
+      - OWNER_ID=${DRAGONWILDS_OWNER_ID}
+      - ADMIN_PASSWORD=${DRAGONWILDS_ADMIN_PASSWORD}
+      - SERVER_NAME=DragonWildsServer
+      - DEFAULT_WORLD_NAME=world
+      - WORLD_PASSWORD=${DRAGONWILDS_WORLD_PASSWORD}
+      - DEFAULT_PORT=7788
+      - MAX_PLAYERS=10
+      - UPDATE_ON_START=true
+      - PUID=1000
+      - PGID=1000
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 8G
+        reservations:
+          cpus: "1.0"
+          memory: 2G
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.11
+    restart: unless-stopped
