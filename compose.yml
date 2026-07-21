@@ -24,6 +24,7 @@ services:
     restart: unless-stopped
 
   pihole:
+    profiles: ["core"]
     container_name: pihole
     image: pihole/pihole:2026.07.2
     ports:
@@ -47,6 +48,7 @@ services:
     restart: unless-stopped
 
   wireguard:
+    profiles: ["core"]
     container_name: wireguard
     image: linuxserver/wireguard:1.0.20260223
     cap_add:

@@ -35,6 +35,8 @@ jobs:
         run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
 
       - name: Deploy
+        env:
+          COMPOSE_PROFILES: core,games,https
         run: |
           docker compose up -d --pull always --remove-orphans
           docker system prune -f

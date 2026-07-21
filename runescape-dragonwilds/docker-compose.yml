@@ -1,5 +1,6 @@
 services:
   runescape-dragonwilds:
+    profiles: ["games"]
     image: indifferentbroccoli/runescape-dragonwilds-server-docker
     container_name: runescape-dragonwilds
     stop_grace_period: 30s

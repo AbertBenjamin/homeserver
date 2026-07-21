@@ -1,5 +1,6 @@
 services:
   terraria:
+    profiles: ["games"]
     container_name: terraria-1.4.5.6
     image: ryshe/terraria:vanilla-1.4.5.6
     tty: true
@@ -25,6 +26,7 @@ services:
     restart: unless-stopped
 
   tmodloader:
+    profiles: ["games"]
     container_name: tmodloader
     image: jacobsmile/tmodloader1.4:v2026.03.3.0
     tty: true
