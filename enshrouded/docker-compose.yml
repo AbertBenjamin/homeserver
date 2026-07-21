@@ -14,6 +14,8 @@ services:
     environment:
       - SERVER_NAME=Enshrouded server
       - UPDATE_CRON=*/30 * * * *
+      - TZ=Europe/Oslo
+      - RESTART_CRON=0 6 * * * 
       - PUID=4711
       - PGID=4711
       - SERVER_ROLE_0_NAME=Admins
