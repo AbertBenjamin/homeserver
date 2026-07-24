@@ -17,6 +17,9 @@ services:
       - TZ=Europe/Oslo
     ports:
       - 8081:8080   # qBittorrent web-UI
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.12
     restart: unless-stopped
 
   qbittorrent:
@@ -44,6 +47,9 @@ services:
       - TZ=Europe/Oslo
     ports:
       - 8191:8191
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.13
     restart: unless-stopped
 
   prowlarr:
@@ -58,6 +64,9 @@ services:
       - /opt/homeserver/prowlarr:/config
     ports:
       - 9696:9696
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.14
     restart: unless-stopped
 
   sonarr:
@@ -74,6 +83,9 @@ services:
       - /mnt/storage/media:/downloads
     ports:
       - 8989:8989
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.15
     restart: unless-stopped
 
   radarr:
@@ -90,6 +102,9 @@ services:
       - /mnt/storage/media:/downloads
     ports:
       - 7878:7878
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.16
     restart: unless-stopped
 
   lidarr:
@@ -106,6 +121,9 @@ services:
       - /mnt/storage/media:/downloads
     ports:
       - 8686:8686
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.17
     restart: unless-stopped
 
   jellyfin:
@@ -121,5 +139,8 @@ services:
       - /mnt/storage/media:/media:ro
     ports:
       - 8096:8096
+    networks:
+      homeserver_default:
+        ipv4_address: 172.18.0.18
     restart: unless-stopped
 
