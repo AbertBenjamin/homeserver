@@ -4,7 +4,7 @@ include:
   - ./terraria/docker-compose.yml
   - ./fileshare/docker-compose.yml
   - ./runescape-dragonwilds/docker-compose.yml
-  # - ./mediaserver/docker-compose.yml
+  - ./mediaserver/docker-compose.yml
 
 services:
   uptime-kuma:
