@@ -47,6 +47,12 @@ services:
       - TZ=Europe/Oslo
     ports:
       - 8191:8191
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:8191/health"]
+      interval: 900s
+      timeout: 60s
+      retries: 3
+      start_period: 5s
     networks:
       homeserver_default:
         ipv4_address: 172.18.0.13
