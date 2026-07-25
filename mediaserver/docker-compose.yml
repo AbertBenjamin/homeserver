@@ -145,6 +145,14 @@ services:
       - /mnt/storage/media:/media:ro
     ports:
       - 8096:8096
+    deploy:
+      resources:
+        limits:
+          cpus: "10.0"
+          memory: 4G
+        reservations:
+          cpus: "2.0"
+          memory: 1G
     networks:
       homeserver_default:
         ipv4_address: 172.18.0.18
