@@ -77,6 +77,9 @@ services:
     networks:
       net-core:
         ipv4_address: 172.20.0.3
+      net-media:
+      net-files:
+      net-games:
 
     restart: unless-stopped
 
