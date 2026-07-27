@@ -3,6 +3,7 @@ services:
     profiles: ["games"]
     image: indifferentbroccoli/runescape-dragonwilds-server-docker
     container_name: runescape-dragonwilds
+    cpuset: "4-15"
     stop_grace_period: 30s
     ports:
       - "7788:7788/udp"

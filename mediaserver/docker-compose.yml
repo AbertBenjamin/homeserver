@@ -4,6 +4,7 @@ services:
     profiles: ["mediaserver"]
     image: qmcgaw/gluetun:v3.41.1
     container_name: gluetun
+    cpuset: "4-15"
     cap_add:
       - NET_ADMIN
     devices:
@@ -26,6 +27,7 @@ services:
       profiles: ["mediaserver"]
       image: linuxserver/qbittorrent:5.1.4-r3-ls452
       container_name: qbittorrent
+      cpuset: "4-15"
       environment:
         - PUID=1000
         - PGID=1000
@@ -43,6 +45,7 @@ services:
     profiles: ["mediaserver"]
     image: ghcr.io/thephaseless/byparr:latest
     container_name: byparr
+    cpuset: "4-15"
     environment:
       - TZ=Europe/Oslo
     ports:
@@ -62,6 +65,7 @@ services:
     profiles: ["mediaserver"]
     image: linuxserver/prowlarr:2.3.5.5327-ls144
     container_name: prowlarr
+    cpuset: "4-15"
     environment:
       - PUID=1000
       - PGID=1000
@@ -79,6 +83,7 @@ services:
     profiles: ["mediaserver"]
     image: linuxserver/sonarr:4.0.17.2952-ls310
     container_name: sonarr
+    cpuset: "4-15"
     environment:
       - PUID=1000
       - PGID=1000
@@ -98,6 +103,7 @@ services:
     profiles: ["mediaserver"]
     image: linuxserver/radarr:6.1.1.10360-ls300
     container_name: radarr
+    cpuset: "4-15"
     environment:
       - PUID=1000
       - PGID=1000
@@ -117,6 +123,7 @@ services:
     profiles: ["mediaserver"]
     image: linuxserver/lidarr:3.1.0.4875-ls26
     container_name: lidarr
+    cpuset: "4-15"
     environment:
       - PUID=1000
       - PGID=1000
@@ -136,6 +143,7 @@ services:
     profiles: ["mediaserver"]
     image: linuxserver/jellyfin:10.11.8ubu2404-ls30
     container_name: jellyfin
+    cpuset: "4-15"
     environment:
       - PUID=1000
       - PGID=1000

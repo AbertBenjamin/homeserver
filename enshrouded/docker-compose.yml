@@ -8,6 +8,7 @@ services:
     # ports:
     #   - "15637:15637/udp"
     network_mode: host
+    cpuset: "0-3"
     volumes:
       - ~/enshrouded:/opt/enshrouded
     devices:
