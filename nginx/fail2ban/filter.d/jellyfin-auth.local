@@ -1,0 +1,3 @@
+[Definition]
+failregex = ^<HOST> -.*"(POST|GET) /jellyfin/[^"]*[Aa]uthenticat[^"]*" 401
+ignoreregex =

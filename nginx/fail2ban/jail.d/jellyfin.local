@@ -1,0 +1,9 @@
+[jellyfin-auth]
+enabled = true
+port = http,https
+filter = jellyfin-auth
+logpath = /var/log/nginx/access.log
+maxretry = 5
+findtime = 600
+bantime = 3600
+chain = DOCKER-USER
