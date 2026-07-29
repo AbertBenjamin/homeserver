@@ -29,6 +29,6 @@ services:
           cpus: "1.0"
           memory: 2G
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.11
+      net-games:
+        ipv4_address: 172.23.0.11
     restart: unless-stopped

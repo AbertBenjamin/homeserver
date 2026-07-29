@@ -21,7 +21,10 @@ services:
         limits:
           memory: 256M
     networks:
-      homeserver_default:
+      - net-core
+      - net-media
+      - net-files
+      - net-games
     restart: unless-stopped
 
   pihole:
@@ -46,8 +49,8 @@ services:
         limits:
           memory: 256M
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.5
+      net-core:
+        ipv4_address: 172.20.0.5
     restart: unless-stopped
 
   wireguard:
@@ -65,7 +68,7 @@ services:
       - SERVERURL=${SERVER_URL}
       - SERVERPORT=51820
       - PEERS=10
-      - PEERDNS=172.18.0.5
+      - PEERDNS=172.20.0.5
       - INTERNAL_SUBNET=10.13.13.0
       - ALLOWEDIPS=0.0.0.0/0
     volumes:
@@ -76,11 +79,36 @@ services:
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.3
+      net-core:
+        ipv4_address: 172.20.0.3
+      net-media:
+      net-files:
+      net-games:
 
     restart: unless-stopped
 
 networks:
-  homeserver_default:
-    external: true
+  net-core:
+    name: net-core
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+  net-media:
+    name: net-media
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/24
+  net-files:
+    name: net-files
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/24
+  net-games:
+    name: net-games
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24

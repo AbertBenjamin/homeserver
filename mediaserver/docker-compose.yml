@@ -19,8 +19,8 @@ services:
     ports:
       - 8081:8080   # qBittorrent web-UI
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.12
+      net-media:
+        ipv4_address: 172.21.0.12
     restart: unless-stopped
 
   qbittorrent:
@@ -57,8 +57,8 @@ services:
       retries: 3
       start_period: 5s
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.13
+      net-media:
+        ipv4_address: 172.21.0.13
     restart: unless-stopped
 
   prowlarr:
@@ -75,8 +75,8 @@ services:
     ports:
       - 9696:9696
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.14
+      net-media:
+        ipv4_address: 172.21.0.14
     restart: unless-stopped
 
   sonarr:
@@ -95,8 +95,8 @@ services:
     ports:
       - 8989:8989
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.15
+      net-media:
+        ipv4_address: 172.21.0.15
     restart: unless-stopped
 
   radarr:
@@ -115,8 +115,8 @@ services:
     ports:
       - 7878:7878
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.16
+      net-media:
+        ipv4_address: 172.21.0.16
     restart: unless-stopped
 
   lidarr:
@@ -135,8 +135,8 @@ services:
     ports:
       - 8686:8686
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.17
+      net-media:
+        ipv4_address: 172.21.0.17
     restart: unless-stopped
 
   jellyfin:
@@ -162,7 +162,7 @@ services:
           cpus: "2.0"
           memory: 1G
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.18
+      net-media:
+        ipv4_address: 172.21.0.18
     restart: unless-stopped
 

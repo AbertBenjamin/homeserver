@@ -22,8 +22,8 @@ services:
           cpus: "1.0"
           memory: 512m
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.8
+      net-games:
+        ipv4_address: 172.23.0.8
     restart: unless-stopped
 
   tmodloader:
@@ -110,6 +110,6 @@ services:
           cpus: "1.0"
           memory: 2G
     networks:
-      homeserver_default:
-        ipv4_address: 172.18.0.9
+      net-games:
+        ipv4_address: 172.23.0.9
     restart: unless-stopped
