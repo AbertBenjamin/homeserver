@@ -22,7 +22,9 @@ services:
           memory: 64M
     restart: unless-stopped
     networks:
-      - proxy
+      proxy: {}
+      net-media:
+        ipv4_address: 172.21.0.19
 
   certbot:
     profiles: ["https"]

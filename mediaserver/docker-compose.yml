@@ -150,6 +150,7 @@ services:
       - TZ=Europe/Oslo
     volumes:
       - /opt/homeserver/jellyfin:/config
+      - ./jellyfin/network.xml:/config/network.xml
       - /mnt/storage/media:/media:ro
     ports:
       - 8096:8096
