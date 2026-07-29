@@ -3,6 +3,7 @@ services:
     profiles: ["games"]
     container_name: terraria-1.4.5.6
     image: ryshe/terraria:vanilla-1.4.5.6
+    cpuset: "4-15"
     tty: true
     stdin_open: true
     ports:
@@ -29,6 +30,7 @@ services:
     profiles: ["games"]
     container_name: tmodloader
     image: jacobsmile/tmodloader1.4:v2026.03.3.0
+    cpuset: "4-15"
     tty: true
     stdin_open: true
     ports:

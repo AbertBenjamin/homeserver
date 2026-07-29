@@ -3,6 +3,7 @@ services:
     profiles: ["https"]
     image: nginx:1.27.3-alpine
     container_name: nginx
+    cpuset: "4-15"
     ports:
       - "80:80"
       - "443:443"
@@ -27,6 +28,7 @@ services:
     profiles: ["https"]
     image: certbot/certbot
     container_name: certbot
+    cpuset: "4-15"
     volumes:
       - ~/nginx/certs:/etc/letsencrypt
       - ./html/:/var/www/html
