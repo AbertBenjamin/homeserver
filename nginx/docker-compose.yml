@@ -39,6 +39,28 @@ services:
       - proxy
     restart: unless-stopped
 
+  fail2ban:
+    profiles: ["https"]
+    image: crazymax/fail2ban:1.1.0
+    container_name: fail2ban
+    cpuset: "4-15"
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      - TZ=Europe/Oslo
+      - F2B_LOG_TARGET=STDOUT
+      - F2B_LOG_LEVEL=INFO
+      - F2B_DB_PURGE_AGE=30d
+      - IPTABLES_MODE=auto
+    volumes:
+      - /opt/homeserver/fail2ban:/data
+      - ./fail2ban/jail.d:/data/jail.d:ro
+      - ./fail2ban/filter.d:/data/filter.d:ro
+      - ~/logs:/var/log/nginx:ro
+
 networks:
   proxy:
     name: proxy
