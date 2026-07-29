@@ -2,7 +2,7 @@
 services:
   gluetun:
     profiles: ["mediaserver"]
-    image: qmcgaw/gluetun:v3.41.1
+    image: qmcgaw/gluetun:v3.41.2
     container_name: gluetun
     cpuset: "4-15"
     cap_add:
