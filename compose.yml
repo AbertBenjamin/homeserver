@@ -38,6 +38,7 @@ services:
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dns_listeningMode: "all"
+      FTLCONF_dns_hosts: "192.168.0.197 debian"
     cap_add:
       - NET_ADMIN
     deploy:
