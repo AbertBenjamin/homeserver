@@ -14,7 +14,7 @@ services:
       - VPN_TYPE=wireguard
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
-      - SERVER_CITIES=Oslo
+      - SERVER_CITIES=Gothenburg
       - TZ=Europe/Oslo
     ports:
       - 8081:8080   # qBittorrent web-UI
