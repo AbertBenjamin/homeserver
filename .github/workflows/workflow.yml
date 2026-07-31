@@ -36,7 +36,7 @@ jobs:
 
       - name: Decrypt secret
         working-directory: ./picoshare
-        run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
+        run: sops -d -i .env
 
       - name: Deploy
         env:
