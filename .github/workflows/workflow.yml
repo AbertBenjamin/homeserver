@@ -16,7 +16,7 @@ jobs:
           clean: true
 
       - name: Decrypt secret
-        run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
+        run: sops -d -i .env
 
       - name: Decrypt secret
         working-directory: ./enshrouded
