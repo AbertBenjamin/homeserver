@@ -1,0 +1,15 @@
+services:
+  picoshare:
+    profiles: ["https"]
+    image: mtlynch/picoshare:v1.5.4
+    container_name: picoshare
+    cpuset: "4-15"
+    environment:
+      - PORT=4001
+      - PS_SHARED_SECRET=${PICOSHARE_SHARED_SECRET}
+      - PS_BEHIND_PROXY=true
+    volumes:
+      - /opt/homeserver/picoshare:/data
+    networks:
+      - proxy
+    restart: unless-stopped

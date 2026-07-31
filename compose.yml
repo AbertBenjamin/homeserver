@@ -5,6 +5,7 @@ include:
   - ./fileshare/docker-compose.yml
   - ./runescape-dragonwilds/docker-compose.yml
   - ./mediaserver/docker-compose.yml
+  - ./picoshare/docker-compose.yml
 
 services:
   pihole:
