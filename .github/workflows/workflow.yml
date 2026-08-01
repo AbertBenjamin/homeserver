@@ -20,7 +20,7 @@ jobs:
 
       - name: Decrypt secret
         working-directory: ./enshrouded
-        run: sops -d --input-type dotenv --output-type dotenv .env.enc > .env
+        run: sops -d -i .env
 
       - name: Decrypt secret
         working-directory: ./fileshare
@@ -44,3 +44,4 @@ jobs:
         run: |
           docker compose up -d --pull always --remove-orphans
           docker system prune -f
+
