@@ -1,8 +1,6 @@
 
-.env
-**/.env
-!.env.enc
-!**/.env.enc
+!.env
+!**/.env
 
 *worlds/*.wld
 */data/
