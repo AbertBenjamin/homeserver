@@ -1,7 +1,7 @@
 services:
   nginx:
     profiles: ["https"]
-    image: nginx:1.27.3-alpine
+    image: nginx:1.31.3-alpine
     container_name: nginx
     cpuset: "4-15"
     ports:
