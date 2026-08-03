@@ -8,9 +8,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./config/:/etc/nginx/conf.d
-      - ~/nginx/certs/:/etc/nginx/certs
-      - ./html/:/usr/share/nginx/html
+      - ./config/:/etc/nginx/conf.d:ro
+      - ~/nginx/certs/:/etc/nginx/certs:ro
+      - ./html/:/usr/share/nginx/html:ro
       - ~/logs:/var/log/nginx
     deploy:
       resources:
