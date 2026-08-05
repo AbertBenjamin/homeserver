@@ -34,10 +34,6 @@ jobs:
         working-directory: ./runescape-dragonwilds
         run: sops -d -i .env
 
-      - name: Decrypt secret
-        working-directory: ./picoshare
-        run: sops -d -i .env
-
       - name: Deploy
         env:
           COMPOSE_PROFILES: core,games,https,mediaserver
