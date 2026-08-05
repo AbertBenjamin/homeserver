@@ -20,7 +20,7 @@ services:
       TZ: "Europe/Oslo"
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
-      FTLCONF_dns_listeningMode: "all"
+      FTLCONF_dns_listeningMode: "local"
       FTLCONF_dns_hosts: "192.168.1.39 debian;192.168.1.39 abert.homelinuxserver.org"
     cap_add:
       - NET_ADMIN
