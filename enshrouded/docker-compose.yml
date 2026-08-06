@@ -5,9 +5,8 @@ services:
     container_name: enshrouded-server
     hostname: enshrouded
     stop_grace_period: 90s
-    # ports:
-    #   - "15637:15637/udp"
-    network_mode: host
+    ports:
+      - "15637:15637/udp"
     cpuset: "0-3"
     volumes:
       - ~/enshrouded:/opt/enshrouded
@@ -45,7 +44,6 @@ services:
         reservations:
           cpus: "4.0"
           memory: 4G
-    # networks:
-    #   homeserver_default:
-    #     ipv4_address: 172.18.0.7
+    networks:
+      - net-games
     restart: unless-stopped
