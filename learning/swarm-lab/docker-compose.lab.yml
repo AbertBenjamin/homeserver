@@ -1,0 +1,60 @@
+# Isolated Docker Swarm learning lab.
+#
+# Spins up three nested Docker-in-Docker "nodes" on this SAME host purely
+# so you can practice Swarm commands (docker node ls, service scale,
+# rolling update, drain). This is a teaching tool, not real multi-node
+# infrastructure: all three "nodes" share this machine's disk, power
+# supply and kernel, so it gives none of the fault tolerance real Swarm
+# exists for.
+#
+# It is completely separate from, and must never be confused with or
+# used to replace, the production stack in ../../compose.yml.
+#
+# Usage: see README.md in this directory.
+
+services:
+  manager:
+    image: docker:27-dind
+    container_name: swarmlab-manager
+    hostname: manager
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=
+    networks:
+      swarmlab: {}
+    volumes:
+      - manager-data:/var/lib/docker
+
+  worker1:
+    image: docker:27-dind
+    container_name: swarmlab-worker1
+    hostname: worker1
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=
+    networks:
+      swarmlab: {}
+    volumes:
+      - worker1-data:/var/lib/docker
+
+  worker2:
+    image: docker:27-dind
+    container_name: swarmlab-worker2
+    hostname: worker2
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=
+    networks:
+      swarmlab: {}
+    volumes:
+      - worker2-data:/var/lib/docker
+
+networks:
+  swarmlab:
+    name: swarmlab
+    driver: bridge
+
+volumes:
+  manager-data:
+  worker1-data:
+  worker2-data:
