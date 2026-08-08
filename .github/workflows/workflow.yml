@@ -16,48 +16,23 @@ jobs:
           clean: true
 
       - name: Decrypt secret
-        run: |
-          while IFS='=' read -r key value; do
-            [[ -z "$key" || "$key" == \#* ]] && continue
-            echo "::add-mask::$value"
-            echo "$key=$value" >> "$GITHUB_ENV"
-          done < <(sops -d .env)
+        run: "$GITHUB_WORKSPACE/.github/scripts/decrypt-sops-env.sh"
 
       - name: Decrypt secret
         working-directory: ./enshrouded
-        run: |
-          while IFS='=' read -r key value; do
-            [[ -z "$key" || "$key" == \#* ]] && continue
-            echo "::add-mask::$value"
-            echo "$key=$value" >> "$GITHUB_ENV"
-          done < <(sops -d .env)
+        run: "$GITHUB_WORKSPACE/.github/scripts/decrypt-sops-env.sh"
 
       - name: Decrypt secret
         working-directory: ./fileshare
-        run: |
-          while IFS='=' read -r key value; do
-            [[ -z "$key" || "$key" == \#* ]] && continue
-            echo "::add-mask::$value"
-            echo "$key=$value" >> "$GITHUB_ENV"
-          done < <(sops -d .env)
+        run: "$GITHUB_WORKSPACE/.github/scripts/decrypt-sops-env.sh"
 
       - name: Decrypt secret
         working-directory: ./mediaserver
-        run: |
-          while IFS='=' read -r key value; do
-            [[ -z "$key" || "$key" == \#* ]] && continue
-            echo "::add-mask::$value"
-            echo "$key=$value" >> "$GITHUB_ENV"
-          done < <(sops -d .env)
+        run: "$GITHUB_WORKSPACE/.github/scripts/decrypt-sops-env.sh"
 
       - name: Decrypt secret
         working-directory: ./runescape-dragonwilds
-        run: |
-          while IFS='=' read -r key value; do
-            [[ -z "$key" || "$key" == \#* ]] && continue
-            echo "::add-mask::$value"
-            echo "$key=$value" >> "$GITHUB_ENV"
-          done < <(sops -d .env)
+        run: "$GITHUB_WORKSPACE/.github/scripts/decrypt-sops-env.sh"
 
       - name: Deploy
         env:
