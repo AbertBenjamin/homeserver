@@ -16,23 +16,48 @@ jobs:
           clean: true
 
       - name: Decrypt secret
-        run: sops -d -i .env
+        run: |
+          while IFS='=' read -r key value; do
+            [[ -z "$key" || "$key" == \#* ]] && continue
+            echo "::add-mask::$value"
+            echo "$key=$value" >> "$GITHUB_ENV"
+          done < <(sops -d .env)
 
       - name: Decrypt secret
         working-directory: ./enshrouded
-        run: sops -d -i .env
+        run: |
+          while IFS='=' read -r key value; do
+            [[ -z "$key" || "$key" == \#* ]] && continue
+            echo "::add-mask::$value"
+            echo "$key=$value" >> "$GITHUB_ENV"
+          done < <(sops -d .env)
 
       - name: Decrypt secret
         working-directory: ./fileshare
-        run: sops -d -i .env
+        run: |
+          while IFS='=' read -r key value; do
+            [[ -z "$key" || "$key" == \#* ]] && continue
+            echo "::add-mask::$value"
+            echo "$key=$value" >> "$GITHUB_ENV"
+          done < <(sops -d .env)
 
       - name: Decrypt secret
         working-directory: ./mediaserver
-        run: sops -d -i .env
+        run: |
+          while IFS='=' read -r key value; do
+            [[ -z "$key" || "$key" == \#* ]] && continue
+            echo "::add-mask::$value"
+            echo "$key=$value" >> "$GITHUB_ENV"
+          done < <(sops -d .env)
 
       - name: Decrypt secret
         working-directory: ./runescape-dragonwilds
-        run: sops -d -i .env
+        run: |
+          while IFS='=' read -r key value; do
+            [[ -z "$key" || "$key" == \#* ]] && continue
+            echo "::add-mask::$value"
+            echo "$key=$value" >> "$GITHUB_ENV"
+          done < <(sops -d .env)
 
       - name: Deploy
         env:
