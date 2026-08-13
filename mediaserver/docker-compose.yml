@@ -48,6 +48,9 @@ services:
     cpuset: "4-15"
     environment:
       - TZ=Europe/Oslo
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     ports:
       - 8191:8191
     healthcheck:
