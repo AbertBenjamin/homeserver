@@ -22,8 +22,13 @@ services:
       # rebuild. That rebuild also deadlocks (see `dns:` below), so this
       # caused a full DNS outage the first time the container had to be
       # recreated after initial setup.
-      - ./pihole/etc-pihole:/etc/pihole
-      - ./pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+      #
+      # NOTE: must live under ~ (like enshrouded/terraria/nginx below), not
+      # a path inside this repo checkout — the deploy workflow runs
+      # `actions/checkout` with `clean: true`, which wipes any path inside
+      # the repo on every single deploy.
+      - ~/pihole/etc-pihole:/etc/pihole
+      - ~/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     dns:
       # The host's own /etc/resolv.conf points at this same Pi-hole
       # (192.168.1.39). Docker's embedded resolver (127.0.0.11) forwards
