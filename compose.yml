@@ -16,6 +16,25 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "8080:80/tcp"
+    volumes:
+      # Without these, every container recreation (e.g. changing an env var
+      # here) wipes gravity.db/config and forces a from-scratch gravity
+      # rebuild. That rebuild also deadlocks (see `dns:` below), so this
+      # caused a full DNS outage the first time the container had to be
+      # recreated after initial setup.
+      - ./pihole/etc-pihole:/etc/pihole
+      - ./pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    dns:
+      # The host's own /etc/resolv.conf points at this same Pi-hole
+      # (192.168.1.39). Docker's embedded resolver (127.0.0.11) forwards
+      # container lookups to the host's resolv.conf by default, so on a
+      # fresh gravity build the container ends up querying itself before
+      # it's listening -> deadlock ("DNS resolution is currently
+      # unavailable", loops forever). Point the container's own resolver
+      # straight at public DNS so gravity/update checks can never depend
+      # on Pi-hole being up yet.
+      - 1.1.1.1
+      - 8.8.8.8
     environment:
       TZ: "Europe/Oslo"
       WEBPASSWORD: ${PIHOLE_PASSWORD}
