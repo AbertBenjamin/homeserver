@@ -22,6 +22,14 @@ services:
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dns_listeningMode: "all"
       FTLCONF_dns_hosts: "192.168.1.39 debian;192.168.1.39 abert.homelinuxserver.org;192.168.1.39 debian.lan"
+      # Default (1000/60s) gets tripped by Steam's steamcontent.com CDN
+      # cache-server discovery, which fires bursts of tens of thousands of
+      # DNS queries/min. That trips FTL's per-client rate limit, which then
+      # blocks ALL DNS for that client for the rest of the window (looks
+      # like "the internet is down"). Raised to give legitimate bursty
+      # clients headroom while still catching real floods/DGA-style abuse.
+      FTLCONF_dns_rateLimit_count: "15000"
+      FTLCONF_dns_rateLimit_interval: "60"
     cap_add:
       - NET_ADMIN
     deploy:
