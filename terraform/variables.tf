@@ -11,9 +11,9 @@ variable "base_image_url" {
 }
 
 variable "pool_path" {
-  description = "Katalog på hosten for VM-disker (utenfor repo-checkout)"
+  description = "Katalog på hosten for VM-disker. Libvirts konvensjonelle standardsti — AppArmor-tooling og -dokumentasjon er testet mot nettopp denne, i motsetning til egendefinerte poolplasseringer."
   type        = string
-  default     = "/var/lib/libvirt/k3s"
+  default     = "/var/lib/libvirt/images"
 }
 
 variable "network_cidr" {

@@ -1,5 +1,5 @@
 resource "libvirt_pool" "k3s" {
-  name = "k3s"
+  name = "default"
   type = "dir"
 
   target {
