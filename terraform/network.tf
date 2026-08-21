@@ -11,8 +11,17 @@ resource "libvirt_network" "k3s" {
     enabled = true
   }
 
+  # Pi-hole binder 0.0.0.0:53 på hosten, så nettets dnsmasq kan ikke selv
+  # tilby DNS (port 53 på 192.168.100.1 er opptatt). DHCP deler i stedet ut
+  # eksterne DNS-servere direkte, så cluster-infra ikke avhenger av Pi-hole.
   dns {
-    enabled    = true
-    local_only = true
+    enabled = false
+  }
+
+  dnsmasq_options {
+    options {
+      option_name  = "dhcp-option"
+      option_value = "6,1.1.1.1,8.8.8.8"
+    }
   }
 }

@@ -25,8 +25,15 @@ apt-get update
 apt-get install -y \
     docker-ce docker-ce-cli containerd.io docker-compose-plugin \
     qemu-system-x86 libvirt-daemon-system \
-    sops age \
-    git curl
+    sops age genisoimage \
+    git curl unzip vim
+
+# terraform-provider-libvirt bygger cloud-init-ISO-er med 'mkisofs', som i
+# Debian heter genisoimage uten kompatibilitets-symlink
+ln -sf /usr/bin/genisoimage /usr/local/bin/mkisofs
+
+# --- vim som systemets default-editor ---------------------------------------
+update-alternatives --set editor /usr/bin/vim.basic
 
 # --- Grupper (docker for compose-deploy, libvirt for terraform) -------------
 adduser "$ADMIN_USER" docker
