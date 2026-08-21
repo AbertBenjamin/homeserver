@@ -7,3 +7,10 @@
 
 wireguard/config/
 
+# terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+
