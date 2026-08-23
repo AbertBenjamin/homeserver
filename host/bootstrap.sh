@@ -24,37 +24,22 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 apt-get update
 apt-get install -y \
     docker-ce docker-ce-cli containerd.io docker-compose-plugin \
-    qemu-system-x86 libvirt-daemon-system \
-    sops age genisoimage \
-    git curl unzip vim
-
-# terraform-provider-libvirt bygger cloud-init-ISO-er med 'mkisofs', som i
-# Debian heter genisoimage uten kompatibilitets-symlink
-ln -sf /usr/bin/genisoimage /usr/local/bin/mkisofs
+    sops age \
+    git curl unzip vim jq
 
 # --- vim som systemets default-editor ---------------------------------------
 update-alternatives --set editor /usr/bin/vim.basic
 
-# --- AppArmor: virt-aa-helper mangler sys_admin/sys_resource i shipped profil
-# (bekreftet via dmesg apparmor="DENIED" ... capname). Denne fiksen alene var
-# ikke nok — helperen klarer uansett ikke å spore backing-file-kjeden fra
-# overlay-disken til base-imaget, så per-VM-profilen mangler regelen for
-# base-imaget og QEMU nektes tilgang. Løsning: skru av per-VM AppArmor-
-# konfinering for libvirt (rører ikke AppArmor andre steder på hosten).
-tee /etc/apparmor.d/local/usr.lib.libvirt.virt-aa-helper <<'AAEOF'
-capability sys_admin,
-capability sys_resource,
-AAEOF
-sed -i 's/^#\?security_driver = .*/security_driver = "none"/' /etc/libvirt/qemu.conf
-grep -q '^security_driver' /etc/libvirt/qemu.conf || echo 'security_driver = "none"' >> /etc/libvirt/qemu.conf
-systemctl restart libvirtd
+# --- k3d ---------------------------------------------------------------------
+# Installeres her (root allerede tilgjengelig), ikke ad hoc i CI — runner-
+# brukeren har ikke passordløs sudo, så k3d sitt install-script (som selv
+# kjører sudo internt) ville feilet der.
+if ! command -v k3d >/dev/null; then
+    curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+fi
 
-# --- Grupper (docker for compose-deploy, libvirt for terraform) -------------
+# --- Grupper -----------------------------------------------------------------
 adduser "$ADMIN_USER" docker
-adduser "$ADMIN_USER" libvirt
-
-# --- Terraform-state: fast sti utenfor repo-checkouten ----------------------
-install -d -o "$ADMIN_USER" -g "$ADMIN_USER" /var/lib/terraform/homeserver
 
 cat <<'EOF'
 
