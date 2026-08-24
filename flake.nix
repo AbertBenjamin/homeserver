@@ -22,6 +22,8 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               sops # for å dekryptere secrets/.env lokalt
+              kubectl
+              k3d
             ];
           };
         }

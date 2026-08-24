@@ -1,8 +1,8 @@
 services:
   terraria:
     profiles: ["games"]
-    container_name: terraria-1.4.5.7
-    image: ryshe/terraria:vanilla-1.4.5.7
+    container_name: terraria-1.4.5.8
+    image: ryshe/terraria:vanilla-1.4.5.8
     cpuset: "4-15"
     tty: true
     stdin_open: true
