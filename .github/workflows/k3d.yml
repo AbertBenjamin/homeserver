@@ -26,7 +26,7 @@ jobs:
         with:
           clean: true
 
-      - uses: azure/setup-helm@v4
+      - uses: azure/setup-helm@v5
       - uses: azure/setup-kubectl@v4
 
       - name: Opprett cluster (hvis den ikke finnes)
