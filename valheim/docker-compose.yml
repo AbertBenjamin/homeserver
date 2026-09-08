@@ -19,8 +19,7 @@ services:
       - WORLD_NAME=Midgard
       - SERVER_PASS=${SERVER_PASS}
       - SERVER_PORT=2456
-      # Privat server: ikke listet i community-browseren, join via IP:2456
-      - SERVER_PUBLIC=false
+      - SERVER_PUBLIC=true
       - CROSSPLAY=false
       - TZ=Europe/Oslo
       - PUID=1000
