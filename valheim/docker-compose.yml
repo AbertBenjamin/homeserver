@@ -15,12 +15,12 @@ services:
       # Lar serveren sette egen scheduling-prioritet
       - SYS_NICE
     environment:
-      - SERVER_NAME=Valheim
+      - SERVER_NAME=Midgard-9k2v
       - WORLD_NAME=Midgard
       - SERVER_PASS=${SERVER_PASS}
       - SERVER_PORT=2456
       - SERVER_PUBLIC=true
-      - CROSSPLAY=false
+      - CROSSPLAY=true
       - TZ=Europe/Oslo
       - PUID=1000
       - PGID=1000
