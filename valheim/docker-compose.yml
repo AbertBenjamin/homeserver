@@ -1,0 +1,46 @@
+services:
+  valheim:
+    profiles: ["games"]
+    container_name: valheim
+    image: lloesche/valheim-server:latest
+    cpuset: "4-15"
+    stop_grace_period: 120s
+    ports:
+      - "2456:2456/udp"
+      - "2457:2457/udp"
+    volumes:
+      - ~/valheim/config:/config
+      - ~/valheim/data:/opt/valheim
+    cap_add:
+      # Lar serveren sette egen scheduling-prioritet
+      - SYS_NICE
+    environment:
+      - SERVER_NAME=Valheim
+      - WORLD_NAME=Midgard
+      - SERVER_PASS=${SERVER_PASS}
+      - SERVER_PORT=2456
+      # Privat server: ikke listet i community-browseren, join via IP:2456
+      - SERVER_PUBLIC=false
+      - CROSSPLAY=false
+      - TZ=Europe/Oslo
+      - PUID=1000
+      - PGID=1000
+      - UPDATE_CRON=*/30 * * * *
+      - RESTART_CRON=0 6 * * *
+      - BACKUPS=true
+      - BACKUPS_CRON=0 */6 * * *
+      - BACKUPS_DIRECTORY=/config/backups
+      - BACKUPS_MAX_AGE=14
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 6G
+        reservations:
+          cpus: "2.0"
+          memory: 3G
+    networks:
+      net-games:
+        ipv4_address: 172.23.0.12
+    restart: unless-stopped
+
