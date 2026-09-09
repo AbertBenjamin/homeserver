@@ -21,6 +21,9 @@ services:
       - SERVER_PORT=2456
       - SERVER_PUBLIC=true
       - CROSSPLAY=true
+      # World modifiers: faste nivåer, ikke vilkårlige tall.
+      # resources: muchless / less / normal / more / muchmore
+      - SERVER_ARGS=-modifier resources more
       - TZ=Europe/Oslo
       - PUID=1000
       - PGID=1000
