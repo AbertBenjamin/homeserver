@@ -20,7 +20,7 @@ services:
       - SERVER_PASS=${SERVER_PASS}
       - SERVER_PORT=2456
       - SERVER_PUBLIC=true
-      - CROSSPLAY=true
+      - CROSSPLAY=false
       # World modifiers: faste nivåer, ikke vilkårlige tall.
       # resources: muchless / less / normal / more / muchmore
       - SERVER_ARGS=-modifier resources more
