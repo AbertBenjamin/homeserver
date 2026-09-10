@@ -12,7 +12,7 @@ services:
     profiles: ["core"]
     container_name: pihole
     image: pihole/pihole:2026.07.2
-    cpuset: "4-15"
+    cpuset: "8-15"
     ports:
       # Bind DNS til LAN-IP-en, ikke 0.0.0.0 — ellers okkuperes port 53 på alle
       # adresser hosten har, inkludert libvirt-bruer (192.168.100.1), og
@@ -55,7 +55,7 @@ services:
     profiles: ["core"]
     container_name: wireguard
     image: linuxserver/wireguard:1.0.20260223
-    cpuset: "4-15"
+    cpuset: "8-15"
     cap_add:
       - NET_ADMIN
       - SYS_MODULE

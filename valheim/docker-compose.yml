@@ -3,7 +3,7 @@ services:
     profiles: ["games"]
     container_name: valheim
     image: lloesche/valheim-server:latest
-    cpuset: "4-15"
+    cpuset: "4-7"
     stop_grace_period: 120s
     ports:
       - "2456:2456/udp"
