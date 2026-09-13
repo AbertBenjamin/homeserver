@@ -1,7 +1,7 @@
 services:
   nginx:
     profiles: ["https"]
-    image: nginx:1.31.3-alpine
+    image: nginx:1.31.5-alpine
     container_name: nginx
     cpuset: "8-15"
     ports:
@@ -41,7 +41,7 @@ services:
 
   fail2ban:
     profiles: ["https"]
-    image: crazymax/fail2ban:1.1.0
+    image: crazymax/fail2ban:1.1.1
     container_name: fail2ban
     cpuset: "8-15"
     restart: unless-stopped
