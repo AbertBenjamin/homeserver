@@ -21,6 +21,10 @@ services:
       - SERVER_PORT=2456
       - SERVER_PUBLIC=true
       - CROSSPLAY=false
+      # BetterNetworking 2.3.4, bygget fra kilde mot l-1.0.12-assemblies.
+      # Plugin ligger i ~/valheim/config/bepinex/plugins/ og synkes inn av imaget.
+      # Må også installeres på ALLE klienter — komprimering krever begge sider.
+      - BEPINEX=true
       # World modifiers: faste nivåer, ikke vilkårlige tall.
       # resources: muchless / less / normal / more / muchmore
       - SERVER_ARGS=-modifier resources more
