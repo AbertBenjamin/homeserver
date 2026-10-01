@@ -32,7 +32,7 @@ services:
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
       FTLCONF_dns_listeningMode: "all"
-      FTLCONF_dns_hosts: "192.168.1.39 debian;192.168.1.39 abert.homelinuxserver.org;192.168.1.39 debian.lan"
+      FTLCONF_dns_hosts: "192.168.1.39 debian;192.168.1.39 abert.homelinuxserver.org;192.168.1.39 haven.homelinuxserver.org;192.168.1.39 debian.lan"
       # Default (1000/60s) gets tripped by Steam's steamcontent.com CDN
       # cache-server discovery, which fires bursts of tens of thousands of
       # DNS queries/min. That trips FTL's per-client rate limit, which then

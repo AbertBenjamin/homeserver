@@ -45,3 +45,12 @@ jobs:
           docker compose up -d --pull always --remove-orphans
           docker image prune -f
 
+      - name: Reload nginx
+        run: |
+          # Bind-mountet config oppdateres live, men nginx leser den bare ved
+          # oppstart eller reload — og compose rekreerer ikke containeren naar
+          # bare conf-fila er endret. Syntakstest foerst saa en feil ikke tar ned alt.
+          if docker ps --format '{{.Names}}' | grep -qx nginx; then
+            docker exec nginx nginx -t && docker exec nginx nginx -s reload
+          fi
+
