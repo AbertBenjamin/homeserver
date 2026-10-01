@@ -11,6 +11,8 @@ services:
       # nginx terminerer TLS med Let's Encrypt-sertifikatet foran.
       - FORCE_HTTP=true
       - SERVER_NAME=Haven
+      # Trengs bak reverse proxy så genererte lenker peker riktig
+      - PUBLIC_URL=https://haven.homelinuxserver.org
       - TZ=Europe/Oslo
     volumes:
       # Opplastede filer havner her, så den ligger på storage-disken (895 GB)
