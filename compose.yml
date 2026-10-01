@@ -1,6 +1,7 @@
 include:
   - ./enshrouded/docker-compose.yml
   - ./nginx/docker-compose.yml
+  - ./haven/docker-compose.yml
   - ./terraria/docker-compose.yml
   - ./valheim/docker-compose.yml
   - ./fileshare/docker-compose.yml

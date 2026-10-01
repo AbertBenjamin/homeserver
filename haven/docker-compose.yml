@@ -1,0 +1,25 @@
+services:
+  haven:
+    profiles: ["https"]
+    image: ghcr.io/ancsemi/haven:4.16.0
+    container_name: haven
+    cpuset: "8-15"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      # Dropper Havens egne selvsignerte sertifikat og lytter på ren HTTP.
+      # nginx terminerer TLS med Let's Encrypt-sertifikatet foran.
+      - FORCE_HTTP=true
+      - SERVER_NAME=Haven
+      - TZ=Europe/Oslo
+    volumes:
+      # Opplastede filer havner her, så den ligger på storage-disken (895 GB)
+      # og ikke på systemdisken.
+      - /mnt/storage/haven:/data
+    networks:
+      - proxy
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    restart: unless-stopped
