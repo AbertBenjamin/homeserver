@@ -4,6 +4,7 @@ include:
   - ./haven/docker-compose.yml
   - ./terraria/docker-compose.yml
   - ./valheim/docker-compose.yml
+  - ./teamspeak/docker-compose.yml
   - ./fileshare/docker-compose.yml
   - ./runescape-dragonwilds/docker-compose.yml
   - ./mediaserver/docker-compose.yml
@@ -15,11 +16,11 @@ services:
     image: pihole/pihole:2026.07.2
     cpuset: "8-15"
     ports:
-      # Bind DNS til LAN-IP-en, ikke 0.0.0.0 — ellers okkuperes port 53 på alle
-      # adresser hosten har, inkludert libvirt-bruer (192.168.100.1), og
-      # k3s-nettets dnsmasq kan ikke starte.
-      - "192.168.1.39:53:53/tcp"
-      - "192.168.1.39:53:53/udp"
+      # Bind på alle adresser, ikke bare LAN-IP-en: ved boot starter docker før
+      # DHCP har gitt enp4s0 adressen, og en IP-spesifikk binding feiler da med
+      # "cannot assign requested address" så pihole blir liggende nede.
+      - "53:53/tcp"
+      - "53:53/udp"
       - "8080:80/tcp"
     volumes:
       - ~/pihole/etc-pihole:/etc/pihole
