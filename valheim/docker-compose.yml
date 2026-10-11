@@ -2,7 +2,7 @@ services:
   valheim:
     profiles: ["games"]
     container_name: valheim
-    image: lloesche/valheim-server:latest
+    image: lloesche/valheim-server:latest@sha256:c885aa902faf885ceb8f69a34663b90519e65aa65fbd9f893451f0640e218a4f
     cpuset: "4-7"
     stop_grace_period: 120s
     ports:

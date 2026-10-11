@@ -34,6 +34,18 @@ updates:
       time: "03:00"
 
   - package-ecosystem: "docker-compose"
+    directory: "/runescape-dragonwilds"
+    schedule:
+      interval: "daily"
+      time: "03:00"
+
+  - package-ecosystem: "docker-compose"
+    directory: "/valheim"
+    schedule:
+      interval: "daily"
+      time: "03:00"
+
+  - package-ecosystem: "docker-compose"
     directory: "/mediaserver"
     schedule:
       interval: "weekly"

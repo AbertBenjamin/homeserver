@@ -43,7 +43,7 @@ services:
 
   byparr:
     profiles: ["mediaserver"]
-    image: ghcr.io/thephaseless/byparr:latest
+    image: ghcr.io/thephaseless/byparr:2.0.1
     container_name: byparr
     cpuset: "8-15"
     environment:

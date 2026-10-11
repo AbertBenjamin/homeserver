@@ -28,7 +28,7 @@ services:
 
   certbot:
     profiles: ["https"]
-    image: certbot/certbot
+    image: certbot/certbot:v5.8.0
     container_name: certbot
     cpuset: "8-15"
     volumes:
