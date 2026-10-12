@@ -73,6 +73,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Oslo
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - /opt/homeserver/prowlarr:/config
     ports:
@@ -91,6 +94,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Oslo
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - /opt/homeserver/sonarr:/config
       - /mnt/storage/media:/media
@@ -111,6 +117,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Oslo
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - /opt/homeserver/radarr:/config
       - /mnt/storage/media:/media
@@ -131,6 +140,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Oslo
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - /opt/homeserver/lidarr:/config
       - /mnt/storage/media:/media
@@ -151,6 +163,9 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Oslo
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - /opt/homeserver/jellyfin:/config
       - ./jellyfin/network.xml:/config/network.xml
