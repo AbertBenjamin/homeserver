@@ -1,0 +1,52 @@
+services:
+  valheim:
+    profiles: ["games"]
+    container_name: valheim
+    image: lloesche/valheim-server:latest@sha256:c885aa902faf885ceb8f69a34663b90519e65aa65fbd9f893451f0640e218a4f
+    cpuset: "4-7"
+    stop_grace_period: 120s
+    ports:
+      - "2456:2456/udp"
+      - "2457:2457/udp"
+    volumes:
+      - ~/valheim/config:/config
+      - ~/valheim/data:/opt/valheim
+    cap_add:
+      # Lar serveren sette egen scheduling-prioritet
+      - SYS_NICE
+    environment:
+      - SERVER_NAME=Midgard-9k2v
+      - WORLD_NAME=Midgard
+      - SERVER_PASS=${SERVER_PASS}
+      - SERVER_PORT=2456
+      - SERVER_PUBLIC=true
+      - CROSSPLAY=false
+      # BetterNetworking 2.3.4, bygget fra kilde mot l-1.0.12-assemblies.
+      # Plugin ligger i ~/valheim/config/bepinex/plugins/ og synkes inn av imaget.
+      # Må også installeres på ALLE klienter — komprimering krever begge sider.
+      - BEPINEX=true
+      # World modifiers: faste nivåer, ikke vilkårlige tall.
+      # resources: muchless / less / normal / more / muchmore
+      - SERVER_ARGS=-modifier resources more
+      - TZ=Europe/Oslo
+      - PUID=1000
+      - PGID=1000
+      - UPDATE_CRON=*/30 * * * *
+      - RESTART_CRON=0 6 * * *
+      - BACKUPS=true
+      - BACKUPS_CRON=0 */6 * * *
+      - BACKUPS_DIRECTORY=/config/backups
+      - BACKUPS_MAX_AGE=14
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 6G
+        reservations:
+          cpus: "2.0"
+          memory: 3G
+    networks:
+      net-games:
+        ipv4_address: 172.23.0.12
+    restart: unless-stopped
+

@@ -1,0 +1,49 @@
+name: Deploy k3d cluster
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - k3d/**
+      - .github/workflows/k3d.yml
+
+concurrency:
+  group: k3d
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: ./k3d
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, debian]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          clean: true
+
+      - uses: azure/setup-helm@v4
+      - uses: azure/setup-kubectl@v4
+
+      - name: Opprett cluster (hvis den ikke finnes)
+        run: |
+          if k3d cluster list -o json | jq -e '.[] | select(.name=="homeserver")' >/dev/null; then
+            echo "Cluster finnes allerede. k3d har ingen 'apply'-semantikk for"
+            echo "cluster-nivå-innstillinger (server/agent-antall, porter) —"
+            echo "endringer i k3d-config.yaml krever manuell 'k3d cluster delete'"
+            echo "+ ny kjøring. Se k3d/README.md."
+          else
+            k3d cluster create --config k3d-config.yaml
+          fi
+
+      - name: Bootstrap ArgoCD
+        run: |
+          helm repo add argo https://argoproj.github.io/argo-helm
+          helm repo update
+          helm upgrade --install argocd argo/argo-cd \
+            --namespace argocd --create-namespace
+          kubectl apply -f manifests/argocd/root-app.yaml

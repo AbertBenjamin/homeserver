@@ -1,0 +1,24 @@
+# k3d-cluster: k3s som Docker-containere på samme daemon som resten av
+# stacken (compose.yml). Ingen egen VM/container-hypervisor, ingen egen
+# Terraform-provider — dette ER infrastrukturen.
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: homeserver
+servers: 1
+agents: 2
+kubeAPI:
+  # 0.0.0.0 — publisert som en vanlig Docker-port, nåbar direkte fra
+  # arbeidsstasjonen (192.168.1.39:6443), ingen SSH-tunnel nødvendig.
+  hostIP: "0.0.0.0"
+  hostPort: "6443"
+options:
+  k3s:
+    extraArgs:
+      # nødvendig for at kubectl fra utenfor hosten skal stole på sertifikatet
+      - arg: "--tls-san=192.168.1.39"
+        nodeFilters:
+          - server:*
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true

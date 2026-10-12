@@ -7,3 +7,13 @@
 
 wireguard/config/
 
+# terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+
+
+# direnv-cache — lokal, maskinspesifikk
+.direnv/

@@ -34,6 +34,18 @@ updates:
       time: "03:00"
 
   - package-ecosystem: "docker-compose"
+    directory: "/runescape-dragonwilds"
+    schedule:
+      interval: "daily"
+      time: "03:00"
+
+  - package-ecosystem: "docker-compose"
+    directory: "/valheim"
+    schedule:
+      interval: "daily"
+      time: "03:00"
+
+  - package-ecosystem: "docker-compose"
     directory: "/mediaserver"
     schedule:
       interval: "weekly"
@@ -68,6 +80,23 @@ updates:
       docker-images:
         patterns:
           - "*"
+
+  - package-ecosystem: "terraform"
+    directory: "/terraform"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "03:00"
+    labels:
+      - "dependencies"
+      - "terraform"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    ignore:
+      # 0.9.x er en inkompatibel skjema-omskriving av provideren
+      - dependency-name: "dmacvicar/libvirt"
+        versions: [">= 0.9"]
 
   # GitHub Actions workflows
   - package-ecosystem: "github-actions"
