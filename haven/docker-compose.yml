@@ -1,7 +1,7 @@
 services:
   haven:
     profiles: ["https"]
-    image: ghcr.io/ancsemi/haven:4.16.0
+    image: ghcr.io/ancsemi/haven:4.23.0
     container_name: haven
     cpuset: "8-15"
     environment:
