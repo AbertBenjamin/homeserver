@@ -1,0 +1,47 @@
+name: Restart service
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: Container som skal restartes
+        required: true
+        type: choice
+        options:
+          - pihole
+          - wireguard
+          - nginx
+          - certbot
+          - fail2ban
+          - haven
+          - samba
+          - gluetun
+          - qbittorrent
+          - byparr
+          - prowlarr
+          - sonarr
+          - radarr
+          - lidarr
+          - jellyfin
+          - enshrouded-server
+          - runescape-dragonwilds
+          - terraria-1.4.5.8
+          - tmodloader
+          - valheim
+
+jobs:
+  restart:
+    runs-on: [self-hosted, debian]
+    steps:
+      - name: Restart ${{ inputs.service }}
+        env:
+          SERVICE: ${{ inputs.service }}
+        run: |
+          # docker restart (ikke compose up) saa vi slipper aa dekryptere .env —
+          # containeren beholder config fra siste deploy.
+          if ! docker ps -a --format '{{.Names}}' | grep -qxF "$SERVICE"; then
+            echo "::error::Fant ingen container med navn '$SERVICE'"
+            exit 1
+          fi
+          docker restart "$SERVICE"
+          docker ps --filter "name=^${SERVICE}$" --format 'table {{.Names}}\t{{.Status}}'
