@@ -5,6 +5,8 @@ services:
     image: lloesche/valheim-server:latest@sha256:19f55bcf7bb67eedf2ab68c77899593e4c21e869b810686cedc9745a05e2eb01
     cpuset: "4-7"
     stop_grace_period: 120s
+    dns:
+      - "1.1.1.1"
     ports:
       - "2456:2456/udp"
       - "2457:2457/udp"
