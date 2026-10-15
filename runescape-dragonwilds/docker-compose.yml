@@ -9,6 +9,7 @@ services:
       - 1.1.1.1
     ports:
       - "7788:7788/udp"
+      - "8888:8888/udp"
     volumes:
       - ~/runescape-dragonwilds:/home/steam/server-files
     environment:
