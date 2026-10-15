@@ -5,6 +5,8 @@ services:
     container_name: enshrouded-server
     hostname: enshrouded
     stop_grace_period: 90s
+    dns:
+      - "1.1.1.1"
     ports:
       - "15637:15637/udp"
     cpuset: "0-3"
