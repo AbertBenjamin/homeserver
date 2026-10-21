@@ -6,6 +6,8 @@ services:
     cpuset: "8-15"
     tty: true
     stdin_open: true
+    dns:
+      - "1.1.1.1"
     ports:
       - "7777:7777"
     volumes:
@@ -33,6 +35,8 @@ services:
     cpuset: "8-15"
     tty: true
     stdin_open: true
+    dns:
+      - "1.1.1.1"
     ports:
       - "7778:7778"
     volumes:
