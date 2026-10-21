@@ -13,7 +13,16 @@ services:
       - ./config/:/etc/nginx/conf.d:ro
       - /home/benjamin/nginx/certs/:/etc/nginx/certs:ro
       - ./html/:/usr/share/nginx/html:ro
+      # ACME-challenges skrives av certbot. Må være en vertsmappe: under doco-cd
+      # er repo-filene en egen kopi per commit.
+      - /home/benjamin/nginx/acme:/var/www/acme:ro
       - /home/benjamin/logs:/var/log/nginx
+    labels:
+      # doco-cd: oppdater config/html på plass i stedet for å rekreere
+      # containeren, og send SIGHUP så nginx laster inn på nytt. Er confen
+      # ugyldig beholder nginx den gamle (som `nginx -t && nginx -s reload`).
+      cd.doco.deployment.recreate.ignore: "{bindMounts: [/etc/nginx/conf.d, /usr/share/nginx/html]}"
+      cd.doco.deployment.recreate.ignore.signal: "SIGHUP"
     deploy:
       resources:
         limits:
@@ -37,7 +46,8 @@ services:
       - "1.1.1.1"
     volumes:
       - /home/benjamin/nginx/certs:/etc/letsencrypt
-      - ./html/:/var/www/html
+      # webroot_path i renewal-confene er /var/www/html, så målet beholdes
+      - /home/benjamin/nginx/acme:/var/www/html
     entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --quiet; sleep 12h & wait $${!}; done"
     networks:
       - proxy
