@@ -11,8 +11,8 @@ services:
       - "2456:2456/udp"
       - "2457:2457/udp"
     volumes:
-      - ~/valheim/config:/config
-      - ~/valheim/data:/opt/valheim
+      - /home/benjamin/valheim/config:/config
+      - /home/benjamin/valheim/data:/opt/valheim
     cap_add:
       # Lar serveren sette egen scheduling-prioritet
       - SYS_NICE

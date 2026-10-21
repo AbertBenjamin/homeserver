@@ -9,8 +9,8 @@ services:
     ports:
       - "7777:7777"
     volumes:
-      - ~/terraria/worlds:/root/.local/share/Terraria/Worlds
-      - ~/terraria/config:/config
+      - /home/benjamin/terraria/worlds:/root/.local/share/Terraria/Worlds
+      - /home/benjamin/terraria/config:/config
     environment:
       - WORLD_FILENAME=epic.wld
       - CONFIG_FILENAME=serverconfig.txt
@@ -36,7 +36,7 @@ services:
     ports:
       - "7778:7778"
     volumes:
-      - ~/tmodloader/data:/data
+      - /home/benjamin/tmodloader/data:/data
     environment:
       - "TMOD_AUTODOWNLOAD=2824688072, \
         2824688266, \

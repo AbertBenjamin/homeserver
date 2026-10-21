@@ -11,9 +11,9 @@ services:
       - "443:443"
     volumes:
       - ./config/:/etc/nginx/conf.d:ro
-      - ~/nginx/certs/:/etc/nginx/certs:ro
+      - /home/benjamin/nginx/certs/:/etc/nginx/certs:ro
       - ./html/:/usr/share/nginx/html:ro
-      - ~/logs:/var/log/nginx
+      - /home/benjamin/logs:/var/log/nginx
     deploy:
       resources:
         limits:
@@ -36,7 +36,7 @@ services:
     dns:
       - "1.1.1.1"
     volumes:
-      - ~/nginx/certs:/etc/letsencrypt
+      - /home/benjamin/nginx/certs:/etc/letsencrypt
       - ./html/:/var/www/html
     entrypoint: /bin/sh -c "trap exit TERM; while :; do certbot renew --quiet; sleep 12h & wait $${!}; done"
     networks:
@@ -63,7 +63,7 @@ services:
       - /opt/homeserver/fail2ban:/data
       - ./fail2ban/jail.d:/data/jail.d:ro
       - ./fail2ban/filter.d:/data/filter.d:ro
-      - ~/logs:/var/log/nginx:ro
+      - /home/benjamin/logs:/var/log/nginx:ro
 
 networks:
   proxy:

@@ -22,8 +22,8 @@ services:
       - "53:53/udp"
       - "8080:80/tcp"
     volumes:
-      - ~/pihole/etc-pihole:/etc/pihole
-      - ~/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+      - /home/benjamin/pihole/etc-pihole:/etc/pihole
+      - /home/benjamin/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     dns:
       - 1.1.1.1
       - 8.8.8.8
@@ -71,7 +71,7 @@ services:
       - INTERNAL_SUBNET=10.13.13.0
       - ALLOWEDIPS=0.0.0.0/0
     volumes:
-      - ~/wireguard/config:/config
+      - /home/benjamin/wireguard/config:/config
       - /lib/modules:/lib/modules:ro
     ports:
       - "51820:51820/udp"
