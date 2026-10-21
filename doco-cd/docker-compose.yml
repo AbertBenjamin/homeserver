@@ -1,0 +1,44 @@
+# GitOps-agenten som deployer resten av repoet. Er bevisst IKKE med i
+# rot-compose.yml: doco-cd kan ikke starte seg selv, så denne stacken startes
+# for hånd én gang (se host/README.md) og oppdateres for hånd ved versjonsbump.
+services:
+  doco-cd:
+    image: ghcr.io/kimdre/doco-cd:0.129.0
+    container_name: doco-cd
+    cpuset: "8-15"
+    # Ikke avhengig av pihole, som selv deployes av doco-cd
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    environment:
+      TZ: Europe/Oslo
+      LOG_LEVEL: info
+      SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
+      POLL_CONFIG: |
+        - url: https://github.com/AbertBenjamin/homeserver.git
+          reference: main
+          interval: 120
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - data:/data
+      # Samme age-nøkkel som brukes lokalt med sops
+      - /home/benjamin/.config/sops/age/keys.txt:/run/secrets/sops_age_key:ro
+    cap_drop:
+      - ALL
+    cap_add:
+      # keys.txt eies av benjamin med 0600; root i containeren trenger denne
+      # for å lese den når alle andre capabilities er droppet.
+      - DAC_READ_SEARCH
+    healthcheck:
+      start_period: 15s
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    restart: unless-stopped
+
+volumes:
+  data:

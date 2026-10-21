@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://doco.cd/v0.129/schemas/deploy.schema.json
+# Deploy-konfig for doco-cd (se doco-cd/docker-compose.yml). doco-cd poller
+# main, dekrypterer alle sops-krypterte .env-filer i sin egen kopi av repoet og
+# kjører compose for rot-compose.yml (som inkluderer resten).
+
+# Må matche det eksisterende compose-prosjektnavnet, ellers adopteres ikke
+# containerne som kjører i dag.
+name: homeserver
+profiles: [core, games, https, mediaserver]
+# Tilsvarer `--pull always`
+force_image_pull: true
+# Store image-pull + lange stop_grace_period (valheim 120s) sprenger default 3m
+timeout: 20m
