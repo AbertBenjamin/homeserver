@@ -12,6 +12,8 @@ services:
       - "8888:8888/udp"
     volumes:
       - /home/benjamin/runescape-dragonwilds:/home/steam/server-files
+    labels:
+      cd.doco.deployment.autostart: "false"
     environment:
       - OWNER_ID=${OWNER_ID}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}

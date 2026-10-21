@@ -13,6 +13,8 @@ services:
     volumes:
       - /home/benjamin/valheim/config:/config
       - /home/benjamin/valheim/data:/opt/valheim
+    labels:
+      cd.doco.deployment.autostart: "false"
     cap_add:
       # Lar serveren sette egen scheduling-prioritet
       - SYS_NICE
