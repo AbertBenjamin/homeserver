@@ -6,55 +6,50 @@
 # tjenestene i den stacken ved neste forsøk — så en ødelagt spillserver skal
 # ikke kunne ta ned pihole/nginx/media.
 #
-# Felles for alle: force_image_pull tilsvarer `--pull always`; timeout over
-# default 3m pga. store image-pull og lange stop_grace_period; retry med
-# pause så en feilende stack ikke rekreeres hvert 2. minutt.
+# Felles for alle: timeout over default 3m pga. store image-pull og lange
+# stop_grace_period; retry med pause så en feilende stack ikke rekreeres
+# hvert minutt. Ingen force_image_pull: da sjekker doco-cd registryet ved
+# hver poll og rekreerer tjenester når en tag bygges på nytt (linuxserver
+# gjør det ofte). Nye versjoner kommer i stedet via dependabot.
 
 name: core
 working_dir: core
 profiles: [core]
-force_image_pull: true
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 ---
 name: nginx
 working_dir: nginx
 profiles: [https]
-force_image_pull: true
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 ---
 name: haven
 working_dir: haven
 profiles: [https]
-force_image_pull: true
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 ---
 name: mediaserver
 working_dir: mediaserver
 profiles: [mediaserver]
-force_image_pull: true
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 ---
 name: fileshare
 working_dir: fileshare
-force_image_pull: true
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 ---
 name: enshrouded
 working_dir: enshrouded
 profiles: [games]
-force_image_pull: true
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 ---
 name: valheim
 working_dir: valheim
 profiles: [games]
-force_image_pull: true
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 # Av: tmodloader-imaget mangler libicu og krasjer ved oppstart.
@@ -65,13 +60,11 @@ retry: {limit: 2, delay: 10m}
 # name: terraria
 # working_dir: terraria
 # profiles: [games]
-# force_image_pull: true
 # timeout: 20m
 # retry: {limit: 2, delay: 10m}
 ---
 name: runescape-dragonwilds
 working_dir: runescape-dragonwilds
 profiles: [games]
-force_image_pull: true
 timeout: 20m
 retry: {limit: 2, delay: 10m}
