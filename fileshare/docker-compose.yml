@@ -14,3 +14,7 @@ services:
       net-files:
         ipv4_address: 172.22.0.6
     restart: unless-stopped
+
+networks:
+  net-files:
+    external: true

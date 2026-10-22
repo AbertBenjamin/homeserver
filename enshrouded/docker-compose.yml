@@ -51,3 +51,7 @@ services:
     networks:
       - net-games
     restart: unless-stopped
+
+networks:
+  net-games:
+    external: true

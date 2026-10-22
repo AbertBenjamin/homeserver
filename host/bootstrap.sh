@@ -41,6 +41,16 @@ fi
 # --- Grupper -----------------------------------------------------------------
 adduser "$ADMIN_USER" docker
 
+# --- Docker-nettverk ---------------------------------------------------------
+# Delt mellom compose-stackene (deklarert som external der), så de må finnes
+# før doco-cd deployer noe.
+for net in net-core:172.20.0.0/24 net-media:172.21.0.0/24 \
+           net-files:172.22.0.0/24 net-games:172.23.0.0/24 proxy:172.24.0.0/24; do
+    name=${net%%:*}
+    docker network inspect "$name" >/dev/null 2>&1 \
+        || docker network create --driver bridge --subnet "${net#*:}" "$name"
+done
+
 cat <<'EOF'
 
 Ferdig. Manuelle steg som gjenstår (secrets kan ikke bo i git):

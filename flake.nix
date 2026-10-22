@@ -19,7 +19,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
         {
-          default = pkgs.mkShell {
+          default = pkgs.mkShellNoCC {
             packages = with pkgs; [
               sops # for å dekryptere secrets/.env lokalt
               kubectl

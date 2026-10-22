@@ -58,7 +58,10 @@ services:
       interval: 900s
       timeout: 60s
       retries: 3
-      start_period: 5s
+      # Sjekk hvert 5. sekund under oppstart, ellers blir containeren først
+      # "healthy" etter 15 min — og doco-cd venter på det før deployen er ferdig.
+      start_period: 60s
+      start_interval: 5s
     networks:
       net-media:
         ipv4_address: 172.21.0.13
@@ -185,3 +188,6 @@ services:
         ipv4_address: 172.21.0.18
     restart: unless-stopped
 
+networks:
+  net-media:
+    external: true

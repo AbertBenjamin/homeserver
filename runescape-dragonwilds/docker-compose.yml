@@ -37,3 +37,7 @@ services:
       net-games:
         ipv4_address: 172.23.0.11
     restart: unless-stopped
+
+networks:
+  net-games:
+    external: true
