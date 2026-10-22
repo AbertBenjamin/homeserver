@@ -104,8 +104,6 @@ services:
       # (Deprecated) If TMOD_USECONFIGFILE is set to "Yes", it is expected to have a serverconfig.txt mapped. The Server Settings above will be ignored.
       - "TMOD_USECONFIGFILE=No"
       - "UPDATE_NOTICE=false"
-      # Imaget mangler libicu, og uten denne krasjer .NET ved oppstart
-      - "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1"
       - "TMOD_PORT=7778"
     deploy:
       resources:
@@ -119,3 +117,7 @@ services:
       net-games:
         ipv4_address: 172.23.0.9
     restart: unless-stopped
+
+networks:
+  net-games:
+    external: true

@@ -1,13 +1,3 @@
-include:
-  - ./enshrouded/docker-compose.yml
-  - ./nginx/docker-compose.yml
-  - ./haven/docker-compose.yml
-  # - ./terraria/docker-compose.yml
-  - ./valheim/docker-compose.yml
-  - ./fileshare/docker-compose.yml
-  - ./runescape-dragonwilds/docker-compose.yml
-  - ./mediaserver/docker-compose.yml
-
 services:
   pihole:
     profiles: ["core"]
@@ -87,27 +77,14 @@ services:
     restart: unless-stopped
 
 networks:
+  # Alle nettverk er delt mellom stackene og opprettes av host/bootstrap.sh
+  # (subnett står der). Ingen stack eier dem, så rekkefølgen doco-cd
+  # deployer stackene i spiller ingen rolle.
   net-core:
-    name: net-core
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/24
+    external: true
   net-media:
-    name: net-media
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.21.0.0/24
+    external: true
   net-files:
-    name: net-files
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.22.0.0/24
+    external: true
   net-games:
-    name: net-games
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.23.0.0/24
+    external: true
