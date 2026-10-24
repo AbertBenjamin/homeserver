@@ -2,9 +2,9 @@
 # Serveren er alltid på, så de to maskinene trenger aldri å være på samtidig.
 #
 # Data ligger under /mnt/storage, og er dermed også synlig i SMB-sharet.
-# Sync-porten (22000) publiseres på verten, slik at desktopen (LAN) og Macen
-# (WireGuard) når den på 192.168.1.39. Web-grensesnittet publiseres IKKE:
-# åpne http://172.22.0.7:8384 fra en maskin på WireGuard.
+# Sync-porten (22000) og web-grensesnittet (8384) publiseres på verten, slik
+# at begge nås på 192.168.1.39 fra hjemmenettet og via WireGuard.
+# Grensesnittet har ikke passord: serveren er bare tilgjengelig lokalt og over VPN.
 services:
   syncthing:
     container_name: syncthing
@@ -18,6 +18,7 @@ services:
     ports:
       - "22000:22000/tcp"
       - "22000:22000/udp"
+      - "8384:8384"
     volumes:
       - /opt/homeserver/syncthing:/var/syncthing/config
       - /mnt/storage/reaper:/var/syncthing/reaper
