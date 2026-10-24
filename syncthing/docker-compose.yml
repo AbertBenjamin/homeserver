@@ -1,0 +1,31 @@
+# Syncthing: knutepunkt for REAPER-prosjektene mellom desktopen og Macen.
+# Serveren er alltid på, så de to maskinene trenger aldri å være på samtidig.
+#
+# Data ligger under /mnt/storage, og er dermed også synlig i SMB-sharet.
+# Sync-porten (22000) publiseres på verten, slik at desktopen (LAN) og Macen
+# (WireGuard) når den på 192.168.1.39. Web-grensesnittet publiseres IKKE:
+# åpne http://172.22.0.7:8384 fra en maskin på WireGuard.
+services:
+  syncthing:
+    container_name: syncthing
+    image: syncthing/syncthing:2.1.7
+    cpuset: "8-15"
+    hostname: homeserver
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Europe/Oslo
+    ports:
+      - "22000:22000/tcp"
+      - "22000:22000/udp"
+    volumes:
+      - /opt/homeserver/syncthing:/var/syncthing/config
+      - /mnt/storage/reaper:/var/syncthing/reaper
+    networks:
+      net-files:
+        ipv4_address: 172.22.0.7
+    restart: unless-stopped
+
+networks:
+  net-files:
+    external: true
