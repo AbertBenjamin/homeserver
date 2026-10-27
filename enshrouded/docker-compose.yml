@@ -1,7 +1,7 @@
 services:
   enshrouded:
     profiles: ["games"]
-    image: mornedhels/enshrouded-server:1.7.2-wine
+    image: mornedhels/enshrouded-server:1.8.1-wine
     container_name: enshrouded-server
     hostname: enshrouded
     stop_grace_period: 90s
