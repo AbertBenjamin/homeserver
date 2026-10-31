@@ -123,6 +123,25 @@ updates:
       prefix: "chore"
       include: "scope"
 
+  - package-ecosystem: "docker-compose"
+    directory: "/immich"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "03:00"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    # server og machine-learning må alltid bumpes sammen
+    groups:
+      docker-images:
+        patterns:
+          - "*"
+
   - package-ecosystem: "terraform"
     directory: "/terraform"
     schedule:

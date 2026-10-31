@@ -46,6 +46,11 @@ working_dir: syncthing
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 ---
+name: immich
+working_dir: immich
+timeout: 20m
+retry: {limit: 2, delay: 10m}
+---
 name: enshrouded
 working_dir: enshrouded
 profiles: [games]
