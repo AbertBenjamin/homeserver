@@ -1,9 +1,4 @@
-# Immich: bildebackup fra mobilene. Kun LAN og WireGuard foreløpig — ingen
-# nginx-rute, så den nås på http://192.168.1.39:2283 (hjemmefra via VPN).
-#
-# Bildene ligger på storage-disken, Postgres på systemdisken (/opt): Immich
-# advarer mot databasen på treg disk. server og machine-learning må ha samme
-# tag. Postgres-imaget er Immichs eget (vectorchord), ikke vanlig postgres.
+
 services:
   immich-server:
     container_name: immich-server
@@ -21,6 +16,13 @@ services:
     volumes:
       - /mnt/storage/immich:/data
       - /etc/localtime:/etc/localtime:ro
+    networks:
+      # Fast IP på net-files, som wireguard-containeren også er koblet til,
+      # så VPN-klientene når den direkte uten å gå via LAN-IP-en.
+      net-files:
+        ipv4_address: 172.22.0.8
+      # db/redis ligger bare her
+      default: {}
     depends_on:
       - immich-redis
       - immich-postgres
@@ -67,5 +69,7 @@ services:
     shm_size: 128mb
     restart: unless-stopped
 
-# Ingen delte nettverk: db/redis ligger på stackens eget default-nettverk, og
-# server nås via porten på hosten (også fra WireGuard-klientene).
+networks:
+  net-files:
+    external: true
+
