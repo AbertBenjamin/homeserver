@@ -51,6 +51,11 @@ working_dir: immich
 timeout: 20m
 retry: {limit: 2, delay: 10m}
 ---
+name: homeassistant
+working_dir: homeassistant
+timeout: 20m
+retry: {limit: 2, delay: 10m}
+---
 name: enshrouded
 working_dir: enshrouded
 profiles: [games]

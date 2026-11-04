@@ -1,0 +1,28 @@
+# Home Assistant (Container-varianten — ingen add-ons/Supervisor; ting som
+# Mosquitto/Zigbee2MQTT legges eventuelt til som egne tjenester her).
+#
+# network_mode: host fordi auto-discovery (mDNS/SSDP, Chromecast, HomeKit,
+# Hue osv.) bruker multicast på LAN-et, som ikke slipper gjennom en
+# bridge. Web-UI havner da direkte på debian:8123.
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:2026.10.4
+    cpuset: "8-15"
+    network_mode: host
+    environment:
+      TZ: Europe/Oslo
+    volumes:
+      - /opt/homeserver/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+      # Bluetooth-integrasjonen snakker med vertens BlueZ over D-Bus
+      - /run/dbus:/run/dbus:ro
+    # Zigbee/Z-Wave USB-pinne: avkommenter og pek på riktig enhet
+    # (ls -l /dev/serial/by-id/)
+    # devices:
+    #   - /dev/serial/by-id/usb-XXXX:/dev/ttyUSB0
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    restart: unless-stopped
