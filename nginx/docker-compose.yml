@@ -39,7 +39,7 @@ services:
 
   certbot:
     profiles: ["https"]
-    image: certbot/certbot:v5.9.0
+    image: certbot/certbot:v5.10.0
     container_name: certbot
     cpuset: "8-15"
     dns:
